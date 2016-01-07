@@ -1,0 +1,69 @@
+@charset "utf-8";
+/*
+Theme Name: igarashi-nouen
+Template:   birdfield
+Version:    0.1
+*/
+
+@import url("../birdfield/style.css");
+
+#header #branding #site-description {
+  display: none;
+}
+
+.entry-header .author {
+	display: none;
+}
+
+#about {
+  background: #F5F5F5;
+  padding: 1.6em 0; }
+
+#about .more-link {
+  display: none;
+}
+
+.home .more {
+  text-align: right;
+  padding: 0.8em 0; }
+
+.home .more a {
+  background-color: #AAA;
+  color: #FFF;
+  padding: 0.8em; }
+
+.home .more a:before,
+.home #wall .widget .textwidget p a:before {
+  content: "\f105";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  padding-right: 0.2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-right: 5px; }
+
+.home #wall .widget h3, .blog #wall .widget h3 {
+	margin: 3% 0 7% 5%;
+}
+
+.home #wall .widget h3, .blog #wall .widget p {
+	line-height: 1.6;
+}
+
+@media screen and (min-width: 660px) {
+
+  #menu-wrapper .menu ul#menu-primary-items li.home a:before {
+   content: "\f015";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-right: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-right: 5px; }
+
