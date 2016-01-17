@@ -1,18 +1,25 @@
 @charset "utf-8";
 /*
 Theme Name: igarashi-nouen
+Theme URI:
+Description: a child theme for the BirdFIELD theme.
+Author: Sysbird
+Author URI: http://www.sysbird.jp
 Template:   birdfield
-Version:    0.1
+Version: 1.00
+
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: green
+Text Domain: igarashi-nouen
+
+This theme, like WordPress, is licensed under the GPL.
 */
 
 @import url("../birdfield/style.css");
 
 #header #branding #site-description {
   display: none;
-}
-
-.entry-header .author {
-	display: none;
 }
 
 #about {
@@ -52,6 +59,27 @@ Version:    0.1
 .home #wall .widget h3, .blog #wall .widget p {
 	line-height: 1.6;
 }
+
+.archive.post-type-archive-news #content ul.article {
+    overflow: hidden;
+   list-style: outside none none;
+    margin: 0 0 1.6em;
+    padding: 0;
+}
+
+.archive.post-type-archive-news #content ul.article .hentry {
+  float: left;
+  margin: 0 5px 10px;
+  width: 300px;
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #e6e6e6;
+}
+
+.archive.post-type-archive-news #content ul.article .hentry a {
+    display: block;
+    height: 100%;
+}
+
 
 @media screen and (min-width: 660px) {
 

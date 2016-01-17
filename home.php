@@ -1,8 +1,4 @@
-<?php
-/*
-The home template file.
-*/
-get_header(); ?>
+<?php get_header(); ?>
 
 <div id="content">
 	<?php $birdfarm_header_image = get_header_image(); ?>
@@ -30,17 +26,13 @@ get_header(); ?>
 			<?php if( is_paged()  ): ?>
 				<?php $birdfield_pagination = get_the_posts_pagination( array(
 						'mid_size'	=> 3,
-						'prev_text'	=> esc_html__( 'Previous page', 'birdfield' ),
-						'next_text'	=> esc_html__( 'Next page', 'birdfield' ),
 						'screen_reader_text'	=> 'pagination',
 					) );
 
-				$birdfield_pagination = str_replace( '<h2 class="screen-reader-text">pagination</h2>', '', $birdfield_pagination );
-				echo $birdfield_pagination; ?>
+					$birdfield_pagination = str_replace( '<h2 class="screen-reader-text">pagination</h2>', '', $birdfield_pagination );
+					echo $birdfield_pagination; ?>
 			<?php else: ?>
-				<div class="more">
-					<?php next_posts_link( 'お知らせをもっと見る' ); ?>
-				</div>
+				<div class="more"><a href="<?php echo esc_url( home_url( '/' ) ); ?>/news/"><?php echo esc_html( get_post_type_object( 'news')->label ); ?>をもっと見る</a></div>
 			<?php endif; ?>
 
 		</div>
