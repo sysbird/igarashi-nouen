@@ -22,9 +22,42 @@ This theme, like WordPress, is licensed under the GPL.
   display: none;
 }
 
+#footer {
+}
+
+#footer:before {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	content: '';
+	width: 100%;
+	height: 0;
+	padding-top: 91px;
+	margin-top: -200px;
+	background-size: contain;
+	background: url("html/images/footer.png") no-repeat center -50px;
+	overflow: hidden;
+}
+
+.home #wall:after,
+.blog #wall:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	content: '';
+	width: 100%;
+	height: 0;
+	padding-top: 4.6%;
+	background: url("html/images/header.png") no-repeat center bottom;
+	background-size: contain;
+	overflow: hidden;
+}
+
 #about {
-  background: #F5F5F5;
-  padding: 1.6em 0; }
+	padding: 1.6em 0;
+}
 
 #about .more-link {
   display: none;
@@ -52,14 +85,6 @@ This theme, like WordPress, is licensed under the GPL.
   -moz-osx-font-smoothing: grayscale;
   padding-right: 5px; }
 
-.home #wall .widget h3, .blog #wall .widget h3 {
-	margin: 3% 0 7% 5%;
-}
-
-.home #wall .widget h3, .blog #wall .widget p {
-	line-height: 1.6;
-}
-
 .archive.post-type-archive-news #content ul.article {
     overflow: hidden;
    list-style: outside none none;
@@ -76,10 +101,9 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 .archive.post-type-archive-news #content ul.article .hentry a {
-    display: block;
-    height: 100%;
+	display: block;
+	height: 100%;
 }
-
 
 @media screen and (min-width: 660px) {
 
@@ -93,5 +117,43 @@ This theme, like WordPress, is licensed under the GPL.
     padding-right: 0.2em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-right: 5px; }
+    padding-right: 5px;
+	}
 
+    .home #wall .widget,
+    .blog #wall .widget {
+      padding: 0;
+  }
+
+}
+
+.home #wall .widget,
+.blog #wall .widget {
+	position: relative;
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	padding: 0;
+	margin: -60% auto 5%;
+	max-width: 400px;
+	max-height: 400px;
+}
+
+home #wall .widget a,
+.blog #wall .widget a {
+	display: block;
+}
+
+@media screen and (min-width: 660px) {
+	.home #wall .widget,
+	.blog #wall .widget {
+		margin-top: 5%;
+	}
+}
+
+@media screen and (min-width: 930px) {
+	.home #wall .widget,
+	.blog #wall .widget {
+		margin-top: 100px;
+	}
+}
