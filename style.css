@@ -16,115 +16,28 @@ Text Domain: igarashi-nouen
 This theme, like WordPress, is licensed under the GPL.
 */
 
-@import url("../birdfield/style.css");
+#header #branding {
+	padding:  0;
+}
+
+#header #branding #site-title {
+	background: url("images/logo-horizontal.png") no-repeat center bottom;
+	background-size: contain;
+	width: 300px;
+	height: 80px;
+	text-indent: -119988px;
+	overflow: hidden;
+	text-align: left;
+}
+
+#header #branding #site-title a {
+	display: block;
+	width: 300px;
+	height: 80px;
+}
 
 #header #branding #site-description {
   display: none;
-}
-
-#footer {
-}
-
-#footer:before {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	display: block;
-	content: '';
-	width: 100%;
-	height: 0;
-	padding-top: 91px;
-	margin-top: -200px;
-	background-size: contain;
-	background: url("html/images/footer.png") no-repeat center -50px;
-	overflow: hidden;
-}
-
-.home #wall:after,
-.blog #wall:after {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	display: block;
-	content: '';
-	width: 100%;
-	height: 0;
-	padding-top: 4.6%;
-	background: url("html/images/header.png") no-repeat center bottom;
-	background-size: contain;
-	overflow: hidden;
-}
-
-#about {
-	padding: 1.6em 0;
-}
-
-#about .more-link {
-  display: none;
-}
-
-.home .more {
-  text-align: right;
-  padding: 0.8em 0; }
-
-.home .more a {
-  background-color: #AAA;
-  color: #FFF;
-  padding: 0.8em; }
-
-.home .more a:before,
-.home #wall .widget .textwidget p a:before {
-  content: "\f105";
-  display: inline-block;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  padding-right: 0.2em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-right: 5px; }
-
-.archive.post-type-archive-news #content ul.article {
-    overflow: hidden;
-   list-style: outside none none;
-    margin: 0 0 1.6em;
-    padding: 0;
-}
-
-.archive.post-type-archive-news #content ul.article .hentry {
-  float: left;
-  margin: 0 5px 10px;
-  width: 300px;
-  background: #fff none repeat scroll 0 0;
-  border: 1px solid #e6e6e6;
-}
-
-.archive.post-type-archive-news #content ul.article .hentry a {
-	display: block;
-	height: 100%;
-}
-
-@media screen and (min-width: 660px) {
-
-  #menu-wrapper .menu ul#menu-primary-items li.home a:before {
-   content: "\f015";
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    padding-right: 0.2em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding-right: 5px;
-	}
-
-    .home #wall .widget,
-    .blog #wall .widget {
-      padding: 0;
-  }
-
 }
 
 .home #wall .widget,
@@ -144,7 +57,97 @@ home #wall .widget a,
 	display: block;
 }
 
+.home #wall:after,
+.blog #wall:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	content: '';
+	width: 100%;
+	height: 0;
+	padding-top: 4.6%;
+	background: url("images/mask-beige.png") no-repeat center bottom;
+	background-size: contain;
+	text-indent: -119988px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.home #content .information .container {
+	padding-top: 1.6em;
+}
+
+.home #content .information:nth-child(2n+1) {
+	background: #FFF;
+}
+
+.home #content .information .more-link {
+  display: none;
+}
+
+.home #content .more {
+  text-align: right;
+  padding: 0.8em 0; }
+
+.home #content .more a {
+	background-color: #a09688;
+	color: #FFF;
+	padding: 0.8em;
+	border-radius: 4px;
+}
+
+.blog #content #blog {
+	padding-top:  0;
+	background: none;
+}
+
+#footer .site-title{
+	border-top: none;
+}
+
+#footer #widget-area {
+	background: #f1efe9;
+}
+
+#footer #widget-area .widget,
+#footer #widget-area .widget a,
+#footer #searchform #s {
+	color: #2e1a00;
+}
+
+#footer #searchform #searchsubmit {
+	background-color: #a09688;
+}
+
+#footer #searchform #s {
+	border: solid 1px #a09688;
+}
+
+#footer #widget-area .widget h3 {
+	border-bottom: dotted 1px #a09688;
+}
+
+.entry-header .author,
+.entry-meta {
+	display: none;
+}
+
 @media screen and (min-width: 660px) {
+
+	#menu-wrapper .menu ul#menu-primary-items li.home a:before {
+		content: "\f015";
+		display: inline-block;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		padding-right: 0.2em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		padding-right: 5px;
+	}
+
 	.home #wall .widget,
 	.blog #wall .widget {
 		margin-top: 5%;

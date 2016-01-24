@@ -39,30 +39,28 @@
 	</section>
 
 	<?php if( ! is_paged() ): ?>
-		<section id="about">
+
+		<?php
+		$myposts = get_posts(array(
+			'post_type' => 'page',
+			'tag' => 'information',
+			'ordey by' => 'date'
+		));
+		foreach( $myposts as $post ):
+			setup_postdata( $post );
+		?>
+
+		<section class="information">
 			<div class="container">
-
-				<?php
-				$myposts = get_posts(array(
-					'post_type' => 'page',
-					'name' => 'about',
-					'posts_per_page' => '1',
-				));
-				?>
-				<?php
-					foreach( $myposts as $post ):
-						setup_postdata( $post );
-				?>
-					<div class="page">
-						<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-						<?php the_content(); ?>
-						<div class="more"><a href="<?php the_permalink(); ?>">続きを見る</a>
-					</div>
-				<?php endforeach;
-				wp_reset_postdata(); ?>
-
+				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+				<?php the_content(); ?>
+				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」を詳しく見る</a>
 			</div>
 		</section>
+
+		<?php endforeach;
+		wp_reset_postdata(); ?>
+
 	<?php endif; ?>
 
 </div>
