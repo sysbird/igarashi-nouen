@@ -21,7 +21,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #header #branding #site-title {
-	background: url("images/logo-horizontal.png") no-repeat center bottom;
+	background: url("images/logo-horizontal.png") no-repeat left top;
 	background-size: contain;
 	width: 300px;
 	height: 80px;
@@ -38,6 +38,20 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header #branding #site-description {
   display: none;
+}
+
+#header.thin {
+	min-height: 60px;
+}
+
+#header.thin  #branding #site-title,
+#header.thin #branding #site-title a {
+	height: 60px;
+}
+
+#header.thin #menu-wrapper .menu ul#menu-primary-items > li > a {
+	height: 60px;
+	padding: 20px 0.8em;
 }
 
 .home #wall .widget,
@@ -75,34 +89,47 @@ home #wall .widget a,
 }
 
 .home #content .information .container {
-	padding-top: 1.6em;
+	padding: 1.6em 0 0;
 }
 
-.home #content .information:nth-child(2n+1) {
-	background: #FFF;
+.home #content .information:nth-child(2n) {
+	background: #FCFBF9;
 }
 
-.home #content .information .more-link {
-  display: none;
+.home #content .information a.more-link {
+	background-color: #817775;
+	color: #FFF;
+	padding: 0.8em;
+	border-radius: 4px;
+	display: block;
+	text-align: center;
+	line-height: 1;
 }
 
+/*
 .home #content .more {
   text-align: right;
   padding: 0.8em 0; }
 
 .home #content .more a {
 	background-color: #a09688;
+	background-color: #817775;
 	color: #FFF;
 	padding: 0.8em;
 	border-radius: 4px;
 }
+*/
 
 .blog #content #blog {
 	padding-top:  0;
 	background: none;
 }
 
-#footer .site-title{
+#footer {
+	background: url("html/images/large-tomato.jpg") no-repeat center top;
+}
+
+#footer .site-title {
 	border-top: none;
 }
 
@@ -117,21 +144,92 @@ home #wall .widget a,
 }
 
 #footer #searchform #searchsubmit {
-	background-color: #a09688;
+	background-color: #817775;
 }
 
 #footer #searchform #s {
-	border: solid 1px #a09688;
+	border: solid 1px #817775;
 }
 
 #footer #widget-area .widget h3 {
-	border-bottom: dotted 1px #a09688;
+	border-bottom: dotted 1px #817775;
 }
 
 .entry-header .author,
 .entry-meta {
 	display: none;
 }
+
+/* google maps */
+#map-canvas {
+	height: 320px;
+	width: 100%;
+	margin-bottom: 1.6em;
+}
+
+/* vegetables page */
+#content table.vegetables-calendar {
+	font-size: 0.9em;
+	margin-bottom: 3.2em;
+}
+
+#content table.vegetables-calendar th,
+#content table.vegetables-calendar td {
+	text-align: center;
+	padding: 0;
+	vertical-align: middle;
+	display: block;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+#content table.vegetables-calendar .title {
+	text-align: left;
+}
+
+#content table.vegetables-calendar th.title {
+	border-bottom: none;
+}
+
+#content table.vegetables-calendar th.title em {
+	display: none;
+}
+
+#content table.vegetables-calendar span {
+	padding: 0.4em 0;
+	width: 8.2%;
+	display: block;
+	float: left;
+}
+
+#content table.vegetables-calendar td span {
+	color: #CCC;
+}
+
+#content table.vegetables-calendar span.best {
+	color: #FFF;
+	background: #ae3f14;
+	border-right: solid 1px #e6e6e6;
+}
+
+#content table.vegetables-calendar span.good {
+	color: #FFF;
+	background: #be9586;
+	border-right: solid 1px #e6e6e6;
+}
+
+#content ul.vegetables-list {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+#content ul.vegetables-list li img {
+	display: block;
+	max-width: 100&;
+	margin: 0 auto 0.8em;
+}
+
 
 @media screen and (min-width: 660px) {
 
@@ -152,6 +250,61 @@ home #wall .widget a,
 	.blog #wall .widget {
 		margin-top: 5%;
 	}
+
+	.home #content .information .container {
+		padding-bottom: 1.6em;
+		overflow: hidden;
+		*zoom: 1;
+	}
+
+	.home #content .information a.more-link {
+		display: block;
+		float: right;
+	}
+
+	/* google maps */
+	#map-canvas {
+		height: 420px;
+	}
+
+	.home #content .information #map-canvas {
+		margin-top: 6.4em;
+	}
+
+	/* vegetables page */
+	#content table.vegetables-calendar {
+		font-size: 1em;
+	}
+
+	#content table.vegetables-calendar th,
+	#content table.vegetables-calendar td {
+		display: table-cell;
+	}
+
+	#content table.vegetables-calendar th.title {
+		border-bottom: 2px solid #e6e6e6;
+	}
+
+	#content table.vegetables-calendar th.title em {
+		display: block;
+	}
+
+	#content ul.vegetables-list {
+		list-style-type: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	#content ul.vegetables-list li {
+		overflow: hidden;
+		*zoom: 1;
+	}
+
+	#content ul.vegetables-list li img {
+		float: right;
+		margin-left: 3%;
+	}
+
 }
 
 @media screen and (min-width: 930px) {
