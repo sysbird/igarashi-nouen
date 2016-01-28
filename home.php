@@ -53,8 +53,15 @@
 		<section class="information">
 			<div class="container">
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_content(); ?>
-				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」を詳しく見る</a>
+				<?php the_content(''); ?>
+				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」を詳しく見る</a></div>
+
+				<?php
+					if( !( false === strpos( $post->post_name, 'access' ) ) ){
+						echo do_shortcode('[igarashi_nouen_map]');
+					}
+				?>
+
 			</div>
 		</section>
 

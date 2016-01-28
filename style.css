@@ -92,33 +92,33 @@ home #wall .widget a,
 	padding: 1.6em 0 0;
 }
 
-.home #content .information:nth-child(2n) {
-	background: #FCFBF9;
+.home #content .information:nth-child(2n+1) {
+	background: #FFF;
 }
 
 .home #content .information a.more-link {
-	background-color: #817775;
+/*	background-color: #817775;
 	color: #FFF;
 	padding: 0.8em;
 	border-radius: 4px;
 	display: block;
 	text-align: center;
-	line-height: 1;
+	line-height: 1; */
 }
 
-/*
 .home #content .more {
-  text-align: right;
-  padding: 0.8em 0; }
+	text-align: center;
+	padding: 0.8em 0;
+}
 
 .home #content .more a {
+	display: block;
 	background-color: #a09688;
 	background-color: #817775;
 	color: #FFF;
 	padding: 0.8em;
 	border-radius: 4px;
 }
-*/
 
 .blog #content #blog {
 	padding-top:  0;
@@ -164,7 +164,7 @@ home #wall .widget a,
 #map-canvas {
 	height: 320px;
 	width: 100%;
-	margin-bottom: 1.6em;
+	margin: 1.6em 0;
 }
 
 /* vegetables page */
@@ -257,18 +257,17 @@ home #wall .widget a,
 		*zoom: 1;
 	}
 
-	.home #content .information a.more-link {
-		display: block;
-		float: right;
+	.home #content .more {
+		text-align: right;
+	}
+
+	.home #content .more  a {
+		display: inline;
 	}
 
 	/* google maps */
 	#map-canvas {
 		height: 420px;
-	}
-
-	.home #content .information #map-canvas {
-		margin-top: 6.4em;
 	}
 
 	/* vegetables page */

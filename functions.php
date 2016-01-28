@@ -79,5 +79,20 @@ add_action( 'pre_get_posts', 'igr_home_query' );
 function igr_scripts() {
 
 	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
+
+	if ( is_page() || is_home() ) {
+		wp_enqueue_script( 'googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp');
+	}
+
+	wp_enqueue_script( 'igarashi-nouen', get_stylesheet_directory_uri() .'/js/script.js', array( 'jquery' ), '1.00');
 }
 add_action( 'wp_enqueue_scripts', 'igr_scripts' );
+
+//////////////////////////////////////////////////////
+// Shortcode GMaps
+function igr_nouen_map ( $atts ) {
+
+	$output = '<div id="map-canvas">地図はいります </div>';
+	return $output;
+}
+add_shortcode( 'igarashi_nouen_map', 'igr_nouen_map' );
