@@ -42,6 +42,7 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header.thin {
 	min-height: 60px;
+	background-color: rgba(36, 91, 40, 0.8);
 }
 
 #header.thin  #branding #site-title,
@@ -92,18 +93,9 @@ home #wall .widget a,
 	padding: 1.6em 0 0;
 }
 
-.home #content .information:nth-child(2n+1) {
+.home #content section:nth-child(2n) {
 	background: #FFF;
-}
-
-.home #content .information a.more-link {
-/*	background-color: #817775;
-	color: #FFF;
-	padding: 0.8em;
-	border-radius: 4px;
-	display: block;
-	text-align: center;
-	line-height: 1; */
+	background: url("images/bg.png") #FFF repeat left top;
 }
 
 .home #content .more {
