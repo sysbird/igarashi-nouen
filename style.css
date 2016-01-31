@@ -42,7 +42,7 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header.thin {
 	min-height: 60px;
-	background-color: rgba(36, 91, 40, 0.8);
+/* 	background-color: rgba(36, 91, 40, 0.8); */
 }
 
 #header.thin  #branding #site-title,
@@ -93,14 +93,14 @@ home #wall .widget a,
 	padding: 1.6em 0 0;
 }
 
-.home #content section:nth-child(2n) {
+.home #content section:nth-child(2n +1) {
 	background: #FFF;
-	background: url("images/bg.png") #FFF repeat left top;
+//	background: url("images/bg.png") #FFF repeat left top;
 }
 
 .home #content .more {
 	text-align: center;
-	padding: 0.8em 0;
+	padding: 0.4em 0;
 }
 
 .home #content .more a {
@@ -110,15 +110,12 @@ home #wall .widget a,
 	color: #FFF;
 	padding: 0.8em;
 	border-radius: 4px;
+	font-size: 0.96em;
 }
 
 .blog #content #blog {
 	padding-top:  0;
 	background: none;
-}
-
-#footer {
-	background: url("html/images/large-tomato.jpg") no-repeat center top;
 }
 
 #footer .site-title {
@@ -175,6 +172,11 @@ home #wall .widget a,
 	*zoom: 1;
 }
 
+#content table.vegetables-calendar th br,
+#content table.vegetables-calendar td br {
+	display: none;
+}
+
 #content table.vegetables-calendar .title {
 	text-align: left;
 }
@@ -222,6 +224,10 @@ home #wall .widget a,
 	margin: 0 auto 0.8em;
 }
 
+#content ul.vegetables-list li em {
+	font-style: normal;
+}
+
 
 @media screen and (min-width: 660px) {
 
@@ -255,6 +261,7 @@ home #wall .widget a,
 
 	.home #content .more  a {
 		display: inline;
+		font-size: 1em;
 	}
 
 	/* google maps */

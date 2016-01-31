@@ -53,8 +53,16 @@
 		<section class="information">
 			<div class="container">
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
+				<?php
+					$more_text = '';
+					if( false === strpos( $post->post_name, 'about' ) ){
+						$more_text = 'を' .$more_text;
+					}
+				?>
+
 				<?php the_content(''); ?>
-				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」を詳しく見る</a></div>
+				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」<?php echo $more_text; ?>詳しく見る</a></div>
 
 				<?php
 					if( !( false === strpos( $post->post_name, 'access' ) ) ){

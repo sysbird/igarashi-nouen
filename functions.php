@@ -46,6 +46,8 @@ add_action( 'after_setup_theme', 'birdfield_child_setup' );
 //////////////////////////////////////////////////////
 // Custom Post Type for News
 function create_post_type_news() {
+
+	// お知ら絵
 	$labels = array(
 		'name'		=> 'お知らせ',
 		'all_items'	=> 'お知らせの一覧',
@@ -61,6 +63,24 @@ function create_post_type_news() {
 		);
 
 	register_post_type( 'news', $args );
+
+	// 収穫野菜
+	$labels = array(
+		'name'		=> '農園でとれる野菜',
+		'all_items'	=> '農園でとれる野菜の一覧',
+		);
+
+	$args = array(
+		'labels'			=> $labels,
+		'supports'		=> array( 'title','editor', 'thumbnail' ),
+		'public'			=> true,	// 公開するかどうが
+		'show_ui'		=> true,	// メニューに表示するかどうか
+		'menu_position'	=> 5,		// メニューの表示位置
+		'has_archive'		=> true,	// アーカイブページの作成
+		);
+
+	register_post_type( 'vegetables', $args );
+
 }
 add_action( 'init', 'create_post_type_news', 0 );
 
@@ -84,15 +104,56 @@ function igr_scripts() {
 		wp_enqueue_script( 'googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp');
 	}
 
-	wp_enqueue_script( 'igarashi-nouen', get_stylesheet_directory_uri() .'/js/script.js', array( 'jquery' ), '1.00');
+	wp_enqueue_script( 'igarashi-nouen', get_stylesheet_directory_uri() .'/js/script.js', array( 'jquery' , 'birdfield' ), '1.00');
 }
 add_action( 'wp_enqueue_scripts', 'igr_scripts' );
 
 //////////////////////////////////////////////////////
-// Shortcode GMaps
+// Shortcode Goole Maps
 function igr_nouen_map ( $atts ) {
 
 	$output = '<div id="map-canvas">地図はいります </div>';
+	$output .= '<input type="hidden" id="map_icon" value="' .get_stylesheet_directory_uri() .'/images/icon_map.png">';
 	return $output;
 }
 add_shortcode( 'igarashi_nouen_map', 'igr_nouen_map' );
+
+//////////////////////////////////////////////////////
+// Shortcode Vegitables
+function igr_nouen_vegetables ( $atts ) {
+
+	return "";
+
+
+	$calendar_html = '<h2> 収穫カレンダー</h2>';
+
+	$vegetables_html ='<h2> 野菜について</h2>';
+	$vegetables_html  .= '<section id="blog"><ul class="article">';
+
+	$myposts= get_posts( array( 'post_type' => 'vegetables', 'posts_per_page' => 5 ) );
+
+	foreach ( $myposts as $post ):
+		setup_postdata( $post );
+
+		// 収穫カレンダー
+
+		// 野菜について
+
+
+		$vegetables_html .= '<li>';
+		$vegetables_html .= '<h3>' .get_the_title( $post->ID ) .'</h3>';
+		$vegetables_html .= get_the_post_thumbnail( $post->ID, 'medium' );
+		$vegetables_html .= strip_tags( get_the_content(''));
+
+		$vegetables_html  .= '</li>';
+
+	endforeach;
+	setup_postdata( $post );
+
+	$vegetables_html .='</ul></section>';
+
+	$output = $calendar_html  .$vegetables_html;
+
+	return $output;
+}
+add_shortcode( 'igarashi_nouen_vegetables', 'igr_nouen_vegetables' );

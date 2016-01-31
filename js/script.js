@@ -68,11 +68,11 @@ function igr_google_maps() {
 	map.mapTypes.set('m_map', m_mapType);
 	map.setMapTypeId('m_map');
 
-	var image = '../images/icon_map.png';
+	var map_icon = jQuery( '#map_icon' ).val();
 	var igrMarker = new google.maps.Marker({
 		position: latlng,
 		map: map,
-		icon: image
+		icon: map_icon
 	});
 
     new google.maps.InfoWindow({
