@@ -95,15 +95,14 @@ home #wall .widget a,
 
 .home #content section:nth-child(2n +1) {
 	background: #FFF;
-//	background: url("images/bg.png") #FFF repeat left top;
 }
 
-.home #content .more {
+#content .more {
 	text-align: center;
 	padding: 0.4em 0;
 }
 
-.home #content .more a {
+#content .more a {
 	display: block;
 	background-color: #a09688;
 	background-color: #817775;
@@ -224,10 +223,10 @@ home #wall .widget a,
 	margin: 0 auto 0.8em;
 }
 
-#content ul.vegetables-list li em {
-	font-style: normal;
+#content ul.vegetables-list li strong {
+	background: #FCFFD6;
+	font-weight: normal;
 }
-
 
 @media screen and (min-width: 660px) {
 
@@ -255,11 +254,11 @@ home #wall .widget a,
 		*zoom: 1;
 	}
 
-	.home #content .more {
+	#content .more {
 		text-align: right;
 	}
 
-	.home #content .more  a {
+	#content .more  a {
 		display: inline;
 		font-size: 1em;
 	}
@@ -301,8 +300,8 @@ home #wall .widget a,
 	#content ul.vegetables-list li img {
 		float: right;
 		margin-left: 3%;
+		max-width: 300px;
 	}
-
 }
 
 @media screen and (min-width: 930px) {

@@ -38,45 +38,44 @@
 		</div>
 	</section>
 
-	<?php if( ! is_paged() ): ?>
-
-		<?php
-		$myposts = get_posts(array(
+	<?php
+		$args = array(
 			'post_type' => 'page',
 			'tag' => 'information',
-			'ordey by' => 'date'
-		));
-		foreach( $myposts as $post ):
-			setup_postdata( $post );
-		?>
+			'post_status' => 'publish'
+		);
+		$the_query = new WP_Query($args);
+		if ( $the_query->have_posts() ) :
+			while ( $the_query->have_posts() ) : $the_query->the_post();
+	?>
 
-		<section class="information">
-			<div class="container">
-				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+	<section class="information">
+		<div class="container">
+			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 
-				<?php
-					$more_text = '';
-					if( false === strpos( $post->post_name, 'about' ) ){
-						$more_text = 'を' .$more_text;
-					}
-				?>
+			<?php
+				$more_text = '';
+				if( false === strpos( $post->post_name, 'about' ) ){
+					$more_text = 'を' .$more_text;
+				}
+			?>
 
-				<?php the_content(''); ?>
-				<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」<?php echo $more_text; ?>詳しく見る</a></div>
+			<?php the_content(''); ?>
+			<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」<?php echo $more_text; ?>詳しく見る</a></div>
 
-				<?php
-					if( !( false === strpos( $post->post_name, 'access' ) ) ){
-						echo do_shortcode('[igarashi_nouen_map]');
-					}
-				?>
+			<?php
+				if( !( false === strpos( $post->post_name, 'access' ) ) ){
+					echo do_shortcode('[igarashi_nouen_map]');
+				}
+			?>
 
-			</div>
-		</section>
+		</div>
+	</section>
 
-		<?php endforeach;
-		wp_reset_postdata(); ?>
-
-	<?php endif; ?>
+	<?php endwhile;
+		endif;
+		wp_reset_postdata();
+	?>
 
 </div>
 
