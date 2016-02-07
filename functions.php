@@ -66,15 +66,13 @@ function create_post_type_news() {
 
 	// 収穫野菜
 	$labels = array(
-//		'name'		=> '農園でとれる野菜',
-//		'all_items'	=> '農園でとれる野菜の一覧',
-		'name'		=> '漢字',
-		'all_items'	=> '漢字の一覧',
+		'name'		=> '農園でとれる野菜',
+		'all_items'	=> '農園でとれる野菜の一覧',
 		);
 
 	$args = array(
 		'labels'		=> $labels,
-		'supports'		=> array( 'title','editor', 'thumbnail' ),
+		'supports'		=> array( 'title','editor', 'thumbnail', 'custom-fields' ),
 		'public'		=> true,	// 公開するかどうが
 		'show_ui'		=> true,	// メニューに表示するかどうか
 		'menu_position'	=> 5,		// メニューの表示位置
@@ -82,7 +80,6 @@ function create_post_type_news() {
 		);
 
 	register_post_type( 'vegetables', $args );
-
 }
 add_action( 'init', 'create_post_type_news', 0 );
 
@@ -122,18 +119,15 @@ add_shortcode( 'igarashi_nouen_map', 'igr_nouen_map' );
 
 //////////////////////////////////////////////////////
 // Shortcode Vegitables
-function igr_nouen_vegetables ( $atts ) {
+function igr_nouen_vegetables_calendar ( $atts ) {
 
 	$post_type = get_post_type_object( 'vegetables' );
 
-	$calendar_html = '<h2>' .$post_type->labels->name .'カレンダー</h2>';
-	$calendar_html .= '<table class="vegetables-calendar"><tbody><tr><th class="title"><em>漢字の名前<em></em></em></th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
-
-	$vegetables_html ='<h2>' .$post_type->labels->name .'</h2>';
-	$vegetables_html  .= '<ul class="vegetables-list">';
+	$html = '<h2>野菜収穫カレンダー</h2>';
+	$html .= '<table class="vegetables-calendar"><tbody><tr><th class="title"><em>野菜の名前</em></th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
 
 	$args = array(
-		'posts_per_page' => 3,
+		'posts_per_page' => -1,
 		'post_type' => 'vegetables',
 		'post_status' => 'publish'
 	);
@@ -141,43 +135,31 @@ function igr_nouen_vegetables ( $atts ) {
 	if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 
+		$selected = get_field( 'calendar' );
+
 		// 収穫カレンダー
-		$calendar_html .= '<tr>';
-		$calendar_html .= '<td class="title">タイトル</td>';
-		$calendar_html .= '<td class="data">';
-		$calendar_html .= '<span>1</span>';
-		$calendar_html .= '<span>2</span>';
-		$calendar_html .= '<span class="good">3</span>';
-		$calendar_html .= '<span class="best">4</span>';
-		$calendar_html .= '<span class="best">5</span>';
-		$calendar_html .= '<span class="best">6</span>';
-		$calendar_html .= '<span class="good">7</span>';
-		$calendar_html .= '<span>8</span>';
-		$calendar_html .= '<span>9</span>';
-		$calendar_html .= '<span>10</span>';
-		$calendar_html .= '<span>11</span>';
-		$calendar_html .= '<span>12</span>';
-		$calendar_html .= '</td>';
-		$calendar_html .= '</tr>';
+		$html .= '<tr>';
+		$html .= '<td class="title"><a href="' .get_permalink() .'">' .get_the_title() .'</a></td>';
+		$html .= '<td class="data">';
+		for( $i = 1; $i <= 12; $i++ ){
+			if( in_array( $i, $selected) ) {
+				$html .= '<span class="best">' .$i .'</span>';
+			}
+			else{
+				$html .= '<span>' .$i .'</span>';
+			}
+		}
 
-		// 野菜について
-		$vegetables_html .= '<li>';
-		$vegetables_html .= '<h3><a href="' .get_permalink() .'">' .get_the_title() .'</a></h3>';
-		$vegetables_html .= get_the_content();
-
-		$vegetables_html  .= '</li>';
+		$html .= '</td>';
+		$html .= '</tr>';
 
 		endwhile;
 	endif;
 
 	wp_reset_postdata();
 
-	$calendar_html .= '</tbody></table>';
+	$html .= '</tbody></table>';
 
-	$link = get_post_type_archive_link( 'vegetables');
-	$vegetables_html .='</ul><div class="more"><a href="' .$link .'">' .$post_type->labels->name .'をもっと見る</a></div>';
-	$output = $calendar_html  .$vegetables_html;
-
-	return $output;
+	return $html;
 }
-add_shortcode( 'igarashi_nouen_vegetables', 'igr_nouen_vegetables' );
+add_shortcode( 'igarashi_nouen_vegetables_calendar', 'igr_nouen_vegetables_calendar' );

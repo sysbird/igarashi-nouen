@@ -148,6 +148,32 @@ home #wall .widget a,
 	display: none;
 }
 
+/*  contact foem */
+.wpcf7-form {
+	padding: 0.8em;
+	max-width: 500px;
+	width: 100%;
+}
+
+.wpcf7-form input {
+	max-width: 500px;
+	width: 100%;
+}
+
+.wpcf7-form textarea {
+	width: 100%;
+	font-size: 1.4em;
+}
+
+.wpcf7-form input[type=submit] {
+	max-width: 200px;
+	padding: 0.8em;
+	border-radius:  4px;
+	background-color: #817775;
+	color: #FFF;
+	cursor: pointer;
+}
+
 /* google maps */
 #map-canvas {
 	height: 320px;
@@ -171,25 +197,25 @@ home #wall .widget a,
 	*zoom: 1;
 }
 
-#content table.vegetables-calendar th br,
-#content table.vegetables-calendar td br {
-	display: none;
-}
-
 #content table.vegetables-calendar .title {
 	text-align: left;
 }
 
-#content table.vegetables-calendar th.title {
-	border-bottom: none;
-}
-
-#content table.vegetables-calendar th.title em {
+#content table.vegetables-calendar th {
 	display: none;
 }
 
+#content table.vegetables-calendar td.title {
+	padding-top: 0.8em;
+}
+
+#content table.vegetables-calendar td.title a {
+	display: block;
+	color: #235926;
+}
+
 #content table.vegetables-calendar span {
-	padding: 0.4em 0;
+	padding: 0.2em 0;
 	width: 8.2%;
 	display: block;
 	float: left;
@@ -226,6 +252,10 @@ home #wall .widget a,
 #content ul.vegetables-list li strong {
 	background: #FCFFD6;
 	font-weight: normal;
+}
+
+#content h3 a {
+	color: #235926;
 }
 
 @media screen and (min-width: 660px) {
@@ -284,6 +314,15 @@ home #wall .widget a,
 
 	#content table.vegetables-calendar th.title em {
 		display: block;
+		font-style: normal;
+	}
+
+	#content table.vegetables-calendar td.title {
+		padding-top: 0;
+	}
+
+	#content table.vegetables-calendar span {
+		padding: 0.2em 0;
 	}
 
 	#content ul.vegetables-list {
