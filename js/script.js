@@ -1,9 +1,39 @@
 jQuery(function() {
 
+	// infinitescroll for all vegetables
+	jQuery( window ).load(function() {
+
+		if( 0 < jQuery( '#all-vegetables' ).length ){
+			path = '';
+			if ( jQuery( '#all-vegetables .rewrite_url' ).length ){
+				// using_permalinks
+				path=new Array();
+				path.push( location.href+'?infinite_timeline_next=' );
+				path.push( "" );
+			}
+
+			// infinitescroll
+			var loading = jQuery( '#all-vegetables img.loading' ).attr( 'src' );
+			jQuery( '#all-vegetables' ).infinitescroll( {
+				navSelector : "#all-vegetables .pagenation",
+				nextSelector : "#all-vegetables .pagenation a",
+				itemSelector : "#all-vegetables .box",
+				loading: {
+					img: loading,
+				},
+				path : path
+			},
+			function( newElements ){
+			} );
+		}
+	} );
+
+	// Google Maps
 	if( jQuery( '#map-canvas').length ){
 		google.maps.event.addDomListener(window, 'load',  igr_google_maps);
 	}
 
+	// thin header for scroll
 	igr_AdjustHeader();
 
 	jQuery( window ).scroll(function () {
@@ -50,114 +80,101 @@ function igr_google_maps() {
 	}
 	var map = new google.maps.Map( document.getElementById('map-canvas'), mapOptions );
 
-// map style beige
-/*
-	var igr_mapstyle = [
-		{
-			"stylers": [
-				{ "lightness": 15 },
-				{ "gamma": 0.8 },
-				{ "hue": "#f1efe9" }
-				]
-		}
-	];
-*/
-
-// map style gray
- var igr_mapstyle = [
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 60
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 40
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.province",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "lightness": 30
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ef8c25"
-            },
-            {
-                "lightness": 40
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#b6c54c"
-            },
-            {
-                "lightness": 40
-            },
-            {
-                "saturation": -40
-            }
-        ]
-    },
-    {}
-  ];
+	// map style gray
+	 var igr_mapstyle = [
+	    {
+	        "featureType": "landscape",
+	        "stylers": [
+	            {
+	                "saturation": -100
+	            },
+	            {
+	                "lightness": 60
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "road.local",
+	        "stylers": [
+	            {
+	                "saturation": -100
+	            },
+	            {
+	                "lightness": 40
+	            },
+	            {
+	                "visibility": "on"
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "transit",
+	        "stylers": [
+	            {
+	                "saturation": -100
+	            },
+	            {
+	                "visibility": "simplified"
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "administrative.province",
+	        "stylers": [
+	            {
+	                "visibility": "off"
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "water",
+	        "stylers": [
+	            {
+	                "visibility": "on"
+	            },
+	            {
+	                "lightness": 30
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "road.highway",
+	        "elementType": "geometry.fill",
+	        "stylers": [
+	            {
+	                "color": "#ef8c25"
+	            },
+	            {
+	                "lightness": 40
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "road.highway",
+	        "elementType": "geometry.stroke",
+	        "stylers": [
+	            {
+	                "visibility": "off"
+	            }
+	        ]
+	    },
+	    {
+	        "featureType": "poi.park",
+	        "elementType": "geometry.fill",
+	        "stylers": [
+	            {
+	                "color": "#b6c54c"
+	            },
+	            {
+	                "lightness": 40
+	            },
+	            {
+	                "saturation": -40
+	            }
+	        ]
+	    },
+	    {}
+	  ];
 
 	var m_mapType = new google.maps.StyledMapType( igr_mapstyle, {name: "漢字五文字"} );
 	map.mapTypes.set('m_map', m_mapType);

@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php get_header();
+
+global $wp_rewrite;
+$infinite_timeline_next = 1;
+if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
+	$infinite_timeline_next = $_GET[ 'infinite_timeline_next' ];
+}
+?>
 
 <div id="content">
 	<div class="container">
@@ -7,31 +14,52 @@
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<?php get_template_part( 'content', 'singular' ); ?>
+		<?php if(1 == $infinite_timeline_next ): ?>
+			<?php get_template_part( 'content', 'singular' ); ?>
+		<?php endif; ?>
 
-		<?php 	$post_type = get_post_type_object( 'vegetables' );
-			$args = array(
-				'posts_per_page' => -1,
-				'post_type' => 'vegetables',
-				'post_status' => 'publish'
-			);
-			$the_query = new WP_Query($args);
-			if ( $the_query->have_posts() ) :
-		?>
-				<ul class="vegetables-list">
+		<div id="all-vegetables">
 
-				<?php
-					while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-						<li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php 	$post_type = get_post_type_object( 'vegetables' );
+
+				//$posts_per_page = get_option( 'posts_per_page' );
+				$posts_per_page = 3;
+				$offset = $posts_per_page * ( $infinite_timeline_next -1 );
+
+				$args = array(
+					'posts_per_page'	=> $posts_per_page,
+					'offset'			=> $offset,
+					'post_type'			=> 'vegetables',
+					'post_status'		=> 'publish'
+				);
+
+				$the_query = new WP_Query($args);
+				if ( $the_query->have_posts() ) :
+			?>
+
+				<div class="box">
+
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+						<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 							<h3 class="entry-title"><a href="<?php the_permalink(); ?>" ><?php the_title(); ?></a></h3>
 							<?php the_content(); ?>
-						</li>
-				<?php	endwhile; ?>
+						</div>
+					<?php endwhile; ?>
 
-				</ul>
-		<?php	endif;
-			wp_reset_postdata();
-		?>
+				</div>
+
+			<?php endif;
+				wp_reset_postdata();
+			?>
+
+			<?php
+				$url = add_query_arg( array( 'infinite_timeline_next' => ( $infinite_timeline_next + 1 ) ) );
+				$rewrite_url = ( $wp_rewrite->using_permalinks() ) ? '<div class="rewrite_url"></div>' : '';
+			?>
+
+			<div class="pagenation more"><a href="<?php echo $url; ?>">もっと見る</a><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="" class="loading"><?php echo $rewrite_url; ?></div>
+
+		</div>
 	</article>
 
 <?php endwhile; ?>

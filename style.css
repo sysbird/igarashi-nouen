@@ -2,7 +2,7 @@
 /*
 Theme Name: igarashi-nouen
 Theme URI:
-Description: a child theme via the BirdFIELD theme.
+Description: igarashi-nouen is a child theme via BirdFIELD.
 Author: Sysbird
 Author URI: http://www.sysbird.jp
 Template:   birdfield
@@ -109,7 +109,6 @@ This theme, like WordPress, is licensed under the GPL.
 
 #content .more a {
 	display: block;
-	background-color: #a09688;
 	background-color: #817775;
 	color: #FFF;
 	padding: 0.8em;
@@ -242,21 +241,39 @@ This theme, like WordPress, is licensed under the GPL.
 	border-right: solid 1px #e6e6e6;
 }
 
-#content ul.vegetables-list {
+#content #all-vegetables {
 	list-style-type: none;
 	margin-left: 0;
 	padding-left: 0;
 }
 
-#content ul.vegetables-list li img {
+#content #all-vegetables .type-vegetables img {
 	display: block;
 	max-width: 100&;
 	margin: 0 auto 0.8em;
 }
 
-#content ul.vegetables-list li strong {
+#content #all-vegetables .type-vegetables strong {
 	background: #FCFFD6;
 	font-weight: normal;
+}
+
+#content #all-vegetables #infscr-loading em {
+	display: none;
+}
+
+#content #all-vegetables .pagenation a {
+	display: block;
+	background-color: #817775;
+	color: #FFF;
+	padding: 0.8em;
+	border-radius: 4px;
+	font-size: 0.96em;
+	text-align: center;
+}
+
+#content #all-vegetables .pagenation img {
+	display: none;
 }
 
 #content h3 a {
@@ -330,18 +347,18 @@ This theme, like WordPress, is licensed under the GPL.
 		padding: 0.2em 0;
 	}
 
-	#content ul.vegetables-list {
+	#content #all-vegetables {
 		list-style-type: none;
 		margin-left: 0;
 		padding-left: 0;
 	}
 
-	#content ul.vegetables-list li {
+	#content #all-vegetables .type-vegetables {
 		overflow: hidden;
 		*zoom: 1;
 	}
 
-	#content ul.vegetables-list li img {
+	#content #all-vegetables .type-vegetables img {
 		float: right;
 		margin-left: 3%;
 		max-width: 300px;
