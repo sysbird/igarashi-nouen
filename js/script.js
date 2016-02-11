@@ -176,7 +176,7 @@ function igr_google_maps() {
 	    {}
 	  ];
 
-	var m_mapType = new google.maps.StyledMapType( igr_mapstyle, {name: "漢字五文字"} );
+	var m_mapType = new google.maps.StyledMapType( igr_mapstyle, {name: "五十嵐農園"} );
 	map.mapTypes.set('m_map', m_mapType);
 	map.setMapTypeId('m_map');
 
@@ -188,7 +188,7 @@ function igr_google_maps() {
 	});
 
     new google.maps.InfoWindow({
-        content: '漢字五文字<a href="https://goo.gl/maps/oJ8dhHpiiB22" style="display :block;padding-top: 5px; font-size: 0.9em;">地図を拡大表示</a>'
+        content: '五十嵐農園<a href="https://goo.gl/maps/oJ8dhHpiiB22" style="display :block;padding-top: 5px; font-size: 0.9em;">地図を拡大表示</a>'
     }).open(igrMarker.getMap(), igrMarker);
 
 }
