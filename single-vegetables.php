@@ -29,6 +29,8 @@
 			} ?>
 
 		</td></tr></tbody></table>
+
+		<?php igarashi_nouen_the_vegetavles_meta(); ?>
 	</article>
 
 <?php endwhile; ?>

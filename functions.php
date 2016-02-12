@@ -119,22 +119,38 @@ function igr_nouen_map ( $atts ) {
 add_shortcode( 'igarashi_nouen_map', 'igr_nouen_map' );
 
 //////////////////////////////////////////////////////
-// Shortcode Vegitables
+// Shortcode Vegitables Calendar
 function igr_nouen_vegetables_calendar ( $atts ) {
 
-	$post_type = get_post_type_object( 'vegetables' );
-
-	$html = '<h2>野菜収穫カレンダー</h2>';
-	$html .= '<table class="vegetables-calendar"><tbody><tr><th class="title"><em>野菜の名前</em></th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
+	$html_table_header = '<table class="vegetables-calendar"><tbody><tr><th class="title">&nbsp;</th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
+	$html_table_footer = '</tbody></table>';
+	$html = '';
 
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'vegetables',
-		'post_status' => 'publish'
+		'post_status' => 'publish',
+		'meta_key'	=> 'type',
+		'orderby'	 => 'meta_value',
 	);
+
 	$the_query = new WP_Query($args);
+	$type_current = '';
 	if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
+
+		$type = get_field( 'type' );
+		if( $type && ( $type != $type_current ) ){
+			if( !empty( $html )){
+				$html .= $html_table_footer;
+			}
+
+			$fields = get_field_object( 'type' );
+			$html .= '<div class="vegetables-meta"><span>' .( $fields[ 'choices' ][ $type ] ) .'</span></div>';
+			$type_current = $type;
+
+			$html .= $html_table_header;
+		}
 
 		$selected = get_field( 'calendar' );
 
@@ -159,8 +175,85 @@ function igr_nouen_vegetables_calendar ( $atts ) {
 
 	wp_reset_postdata();
 
-	$html .= '</tbody></table>';
+	if( !empty( $html )){
+		$html .= $html_table_footer;
+	}
+	$html = '<h2>野菜収穫カレンダー</h2>' .$html;
 
 	return $html;
 }
 add_shortcode( 'igarashi_nouen_vegetables_calendar', 'igr_nouen_vegetables_calendar' );
+
+//////////////////////////////////////////////////////
+// Shortcode Vegitables Pickup at home
+function igr_nouen_vegetables_pickup ( $atts ) {
+
+	$html = '';
+
+	$args = array(
+		'posts_per_page' => 6,
+		'post_type' => 'vegetables',
+		'post_status' => 'publish',
+		'meta_key' => '_thumbnail_id',
+		'orderby'	 => 'rand',
+	);
+
+	$the_query = new WP_Query($args);
+	$type_current = '';
+	if ( $the_query->have_posts() ) :
+
+		$html .= '<ul class="pickup">';
+		while ( $the_query->have_posts() ) : $the_query->the_post();
+
+			$html .= '<li class="hentry"><a href="' .get_permalink() .'">' ;
+
+			if( has_post_thumbnail() ):
+				$html .= '<div class="entry-eyecatch">' .get_the_post_thumbnail(  get_the_ID(), 'large' ) .'</div>';
+			endif;
+
+			$html .= '<header class="entry-header"><h3 class="entry-title">'  .get_the_title() .'</h3></header>';
+			$html .= '</a></li>';
+
+		endwhile;
+		$html .= '</ul>';
+	endif;
+	wp_reset_postdata();
+
+	return $html;
+}
+add_shortcode( 'igarashi_nouen_vegetables_pickup', 'igr_nouen_vegetables_pickup' );
+
+//////////////////////////////////////////////////////
+// Display the Featured Image at vegetable page
+function igarashi_nouen_post_image_html( $html, $post_id, $post_image_id ) {
+
+	if( !( false === strpos( $html, 'anchor' ) ) ){
+		$html = '<a href="' .get_permalink() .'" class="thumbnail">' .$html .'</a>';
+	}
+
+	return $html;
+}
+add_filter( 'post_thumbnail_html', 'igarashi_nouen_post_image_html', 10, 3 );
+
+//////////////////////////////////////////////////////
+// Display the vegetables meta by Advanced Custom Fields
+function igarashi_nouen_the_vegetavles_meta() {
+
+	echo '<div class="vegetables-meta">';
+
+	// type
+	$type = get_field( 'type' );
+	if( $type ){
+		$fields = get_field_object( 'type' );
+		echo '<span>' .( $fields[ 'choices' ][ $type ] ) .'</span>';
+	}
+
+	// season
+	$season = get_field( 'season' );
+	if( $season ){
+		$fields = get_field_object( 'season' );
+		echo '<span>' .( $fields[ 'choices' ][ $season ] ) .'</span>';
+	}
+
+	echo '</div>';
+}

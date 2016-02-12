@@ -69,12 +69,12 @@ This theme, like WordPress, is licensed under the GPL.
 
 .home #wall .widget,
 .blog #wall .widget {
-	background-color: rgba(255, 255, 255, 0.4);
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 .home #wall .widget:hover,
 .blog #wall .widget:hover {
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.6);
 }
 
 .home #wall:after,
@@ -87,7 +87,7 @@ This theme, like WordPress, is licensed under the GPL.
 	width: 100%;
 	height: 0;
 	padding-top: 4.6%;
-	background: url("images/mask-white.png") no-repeat center bottom;
+	background: url("images/mask-header.png") no-repeat center bottom;
 	background-size: contain;
 	text-indent: -119988px;
 	overflow: hidden;
@@ -95,7 +95,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 .home #content .information .container {
-	padding: 1.6em 0 0;
+	padding: 1.6em 0;
 }
 
 .home #content section:nth-child(2n +1) {
@@ -105,6 +105,7 @@ This theme, like WordPress, is licensed under the GPL.
 #content .more {
 	text-align: center;
 	padding: 0.4em 0;
+	margin-bottom: 1.6em;
 }
 
 #content .more a {
@@ -114,6 +115,17 @@ This theme, like WordPress, is licensed under the GPL.
 	padding: 0.8em;
 	border-radius: 4px;
 	font-size: 0.96em;
+}
+
+#content .more a:before {
+	content: "\f054";
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .blog #content #blog {
@@ -185,6 +197,51 @@ This theme, like WordPress, is licensed under the GPL.
 	margin: 1.6em 0;
 }
 
+.home #map-canvas {
+	margin-top: 3.2em;
+}
+
+/* vegetables pickup at home */
+.home #content .pickup {
+	list-style: none;
+	margin: 0 0 1.6em 0;
+	padding: 0;
+	overflow: hidden;
+	*zoom: 1; }
+
+.home #content .pickup li {
+	border: solid 1px #E6E6E6;
+	border-radius: 4px;
+	margin: 0 1% 10px;
+	padding: 0;
+	background: #FFF;
+	width: 48%;
+	float: left;
+}
+
+.home #content .pickup li .entry-eyecatch img {
+	vertical-align: text-bottom;
+	border-radius: 4px 4px 0 0;
+	width: 100%; }
+
+.home #content .pickup li .entry-header {
+	padding: 10px;
+	margin: 0; }
+
+.home #content .pickup li .entry-header .entry-title {
+	font-size: 1.6rem;
+	color: #235926;
+	margin-bottom: 0;
+	border: none;}
+
+.home #content .pickup li a {
+	display: block;
+	height: 100%; }
+
+.home #content .pickup li a:hover {
+	text-decoration: none;
+	background: #F5F5F5; }
+
 /* vegetables page */
 #content table.vegetables-calendar {
 	font-size: 0.9em;
@@ -247,15 +304,33 @@ This theme, like WordPress, is licensed under the GPL.
 	padding-left: 0;
 }
 
-#content #all-vegetables .type-vegetables img {
+#content #all-vegetables .type-vegetables .thumbnail {
 	display: block;
-	max-width: 100&;
+	max-width: 100%;
 	margin: 0 auto 0.8em;
 }
 
 #content #all-vegetables .type-vegetables strong {
 	background: #FCFFD6;
 	font-weight: normal;
+}
+
+#content .vegetables-meta {
+	overflow: hidden;
+	*zoom: 1;
+}
+
+#content .vegetables-meta span {
+	display: block;
+	float: left;
+	margin-right: 0.4em;
+	background: #f8f8f6 ;
+	font-size: 0.9em;
+	width: 4.2em;
+	height: 4.2em;
+	padding-top: 1.6em;
+	text-align: center;
+	border-radius: 50%;
 }
 
 #content #all-vegetables #infscr-loading em {
@@ -276,6 +351,7 @@ This theme, like WordPress, is licensed under the GPL.
 	display: none;
 }
 
+#content h2 a,
 #content h3 a {
 	color: #235926;
 }
@@ -289,7 +365,6 @@ This theme, like WordPress, is licensed under the GPL.
 		font-style: normal;
 		font-weight: normal;
 		line-height: 1;
-		padding-right: 0.2em;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		padding-right: 5px;
@@ -301,7 +376,6 @@ This theme, like WordPress, is licensed under the GPL.
 	}
 
 	.home #content .information .container {
-		padding-bottom: 1.6em;
 		overflow: hidden;
 		*zoom: 1;
 	}
@@ -334,11 +408,6 @@ This theme, like WordPress, is licensed under the GPL.
 		border-bottom: 2px solid #e6e6e6;
 	}
 
-	#content table.vegetables-calendar th.title em {
-		display: block;
-		font-style: normal;
-	}
-
 	#content table.vegetables-calendar td.title {
 		padding-top: 0;
 	}
@@ -358,7 +427,7 @@ This theme, like WordPress, is licensed under the GPL.
 		*zoom: 1;
 	}
 
-	#content #all-vegetables .type-vegetables img {
+	#content #all-vegetables .type-vegetables .thumbnail {
 		float: right;
 		margin-left: 3%;
 		max-width: 300px;
@@ -373,5 +442,14 @@ This theme, like WordPress, is licensed under the GPL.
 
 	#header.thin #menu-wrapper .menu ul#menu-primary-items li ul {
 		top: 60px;
+	}
+
+	.home #content .pickup li {
+		width: 300px;
+		float: left;
+		margin: 0 5px 10px 5px; }
+
+	.home #content .pickup li .entry-header {
+		padding:  20px;
 	}
 }

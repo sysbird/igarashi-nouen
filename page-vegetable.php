@@ -22,8 +22,7 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 
 			<?php 	$post_type = get_post_type_object( 'vegetables' );
 
-				//$posts_per_page = get_option( 'posts_per_page' );
-				$posts_per_page = 3;
+				$posts_per_page = get_option( 'posts_per_page' );
 				$offset = $posts_per_page * ( $infinite_timeline_next -1 );
 
 				$args = array(
@@ -41,8 +40,12 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 
 					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-							<h3 class="entry-title"><a href="<?php the_permalink(); ?>" ><?php the_title(); ?></a></h3>
-							<?php the_content(); ?>
+							<h2 class="entry-title"><a href="<?php the_permalink(); ?>" ><?php the_title(); ?></a></h2>
+							<?php the_post_thumbnail( 'anchor' ); ?>
+							<?php $my_content = apply_filters('the_content',get_the_content());
+							$my_content = preg_replace( "|(<img[^>]+>)|si", "", $my_content );
+							echo $my_content; ?>
+							<?php igarashi_nouen_the_vegetavles_meta(); ?>
 						</div>
 					<?php endwhile; ?>
 

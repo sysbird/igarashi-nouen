@@ -3,6 +3,8 @@ jQuery(function() {
 	// infinitescroll for all vegetables
 	jQuery( window ).load(function() {
 
+		jQuery( "ul.pickup li" ).tile();
+
 		if( 0 < jQuery( '#all-vegetables' ).length ){
 			path = '';
 			if ( jQuery( '#all-vegetables .rewrite_url' ).length ){

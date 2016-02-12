@@ -11,32 +11,21 @@
 		</section>
 	<?php endif; ?>
 
-	<section id="blog">
-		<div class="container">
-			<?php if( ! is_paged()  ): ?>
+	<?php if ( have_posts() ) : ?>
+		<section id="blog">
+			<div class="container">
 				<h2>お知らせ</h2>
-			<?php endif; ?>
 
-			<ul class="article">
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'content', 'home' ); ?>
-			<?php endwhile; ?>
-			</ul>
+				<ul class="article">
+				<?php while ( have_posts() ) : the_post(); ?>
+					<?php get_template_part( 'content', 'home' ); ?>
+				<?php endwhile; ?>
+				</ul>
 
-			<?php if( is_paged()  ): ?>
-				<?php $birdfield_pagination = get_the_posts_pagination( array(
-						'mid_size'	=> 3,
-						'screen_reader_text'	=> 'pagination',
-					) );
-
-					$birdfield_pagination = str_replace( '<h2 class="screen-reader-text">pagination</h2>', '', $birdfield_pagination );
-					echo $birdfield_pagination; ?>
-			<?php else: ?>
 				<div class="more"><a href="<?php echo esc_url( home_url( '/' ) ); ?>/news/"><?php echo esc_html( get_post_type_object( 'news')->label ); ?>をもっと見る</a></div>
-			<?php endif; ?>
-
-		</div>
-	</section>
+			</div>
+		</section>
+	<?php endif; ?>
 
 	<?php
 		$args = array(
@@ -54,14 +43,24 @@
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 
 			<?php
-				$more_text = '';
+				$more_text = '「' .get_the_title() .'」';
 				if( false === strpos( $post->post_name, 'about' ) ){
-					$more_text = 'を' .$more_text;
+					$more_text .= 'を';
 				}
+
+				$more_text .= '詳しく見る';
+				$more_url = get_the_permalink();
 			?>
 
 			<?php the_content(''); ?>
-			<div class="more"><a href="<?php the_permalink(); ?>">「<?php the_title(); ?>」<?php echo $more_text; ?>詳しく見る</a></div>
+
+			<?php
+				if( !( false === strpos( $post->post_name, 'vegetable' ) ) ){
+					echo do_shortcode('[igarashi_nouen_vegetables_pickup]');
+				}
+			?>
+
+			<div class="more"><a href="<?php echo $more_url; ?>"><?php echo $more_text; ?></a></div>
 
 			<?php
 				if( !( false === strpos( $post->post_name, 'access' ) ) ){
