@@ -13,24 +13,38 @@
 			<?php the_content(); ?>
 		</div>
 
-		<?php $selected = get_field( 'calendar' ); ?>
-		<table class="vegetables-calendar"><tbody><tr><th class="title"><em>&nbsp;</em></th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>
+		<?php $selected = get_field( 'calendar' );  // 収穫カレンダー ?>
+			<?php if(is_array($selected)): ?>
 
-		<tr>
-			<td class="title">収穫時期</td>
-			<td class="data">
-			<?php for( $i = 1; $i <= 12; $i++ ){
-				if( in_array( $i, $selected) ) { ?>
-					<span class="best"><?php echo $i; ?></span>
-			<?php	}
-				else{ ?>
-					<span><?php echo $i; ?> </span>
+			<table class="vegetables-calendar"><tbody><tr><th class="title"><em>&nbsp;</em></th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>
+
+			<tr>
+				<td class="title">収穫時期</td>
+				<td class="data">
+				<?php for( $i = 1; $i <= 12; $i++ ){
+					if( in_array( $i, $selected) ) { ?>
+						<span class="best"><?php echo $i; ?></span>
 				<?php	}
+					else{ ?>
+						<span><?php echo $i; ?> </span>
+					<?php	}
+				} ?>
+
+			</td></tr></tbody></table>
+		<?php endif; ?>
+
+		<div class="vegetables-meta">
+			<?php $type = get_field( 'type' );
+			if( $type ) {
+				echo igarashi_nouen_get_type_label( $type );
+			}
+
+			$season = get_field( 'season' );
+			if( $season ){
+				echo igarashi_nouen_get_season_label( $season );
 			} ?>
+		</div>
 
-		</td></tr></tbody></table>
-
-		<?php igarashi_nouen_the_vegetavles_meta(); ?>
 	</article>
 
 <?php endwhile; ?>

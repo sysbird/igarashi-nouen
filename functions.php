@@ -8,28 +8,6 @@ function birdfield_child_add_tag_to_page() {
 add_action('init', 'birdfield_child_add_tag_to_page');
 
 //////////////////////////////////////////////////////
-// CSS
-function birdfield_child_css() {
-
-	//Theme Option
-	$header_color = esc_attr( get_theme_mod( 'birdfield_header_color', '#79a596' ) );
-	$text_color = esc_attr( get_theme_mod( 'birdfield_text_color', '#222327' ) );
-?>
-
-<style type="text/css">
-	.home #content #blog ul.article .hentry .entry-header .entry-title,
-	.home #content h2 a {
-		color: <?php echo $header_color;?> !important;
-	}
-
-</style>
-
-<?php
-
-}
-add_action( 'wp_head', 'birdfield_child_css' );
-
-//////////////////////////////////////////////////////
 // Setup Theme
 function birdfield_child_setup() {
 
@@ -87,8 +65,37 @@ add_action( 'init', 'create_post_type_news', 0 );
 // Filter main query at home
 function igr_home_query( $query ) {
  	if ( $query->is_home() && $query->is_main_query() ) {
+ 		// toppage news
 		$query->set( 'post_type', 'news' );
 		$query->set( 'posts_per_page', 3 );
+	}
+
+	if ( $query->is_archive() && $query->is_main_query() ) {
+		if( 'vegetables' ===  $query->get( 'post_type' )){
+			// vegetables type
+			$type = get_query_var('type') ;
+			if( !empty( $type )){
+				$query->set('meta_query',
+				array(
+				array(
+				'key' => 'type',
+				'value' => $type,
+				'compare' => 'LIKE' )));
+				$query->set( 'posts_per_page', -1 );
+			}
+
+			// vegetables season
+			$season = get_query_var('season') ;
+			if( !empty( $season )){
+				$query->set('meta_query',
+				array(
+				array(
+				'key' => 'season',
+				'value' => $season,
+				'compare' => 'LIKE' )));
+				$query->set( 'posts_per_page', -1 );
+			}
+		}
 	}
 }
 add_action( 'pre_get_posts', 'igr_home_query' );
@@ -145,16 +152,13 @@ function igr_nouen_vegetables_calendar ( $atts ) {
 				$html .= $html_table_footer;
 			}
 
-			$fields = get_field_object( 'type' );
-			$html .= '<div class="vegetables-meta"><span>' .( $fields[ 'choices' ][ $type ] ) .'</span></div>';
+			$html .= '<div class="vegetables-meta">' .igarashi_nouen_get_type_label( $type ) .'</div>';
 			$type_current = $type;
-
 			$html .= $html_table_header;
 		}
 
-		$selected = get_field( 'calendar' );
-
 		// 収穫カレンダー
+		$selected = get_field( 'calendar' );
 		$html .= '<tr>';
 		$html .= '<td class="title"><a href="' .get_permalink() .'">' .get_the_title() .'</a></td>';
 		$html .= '<td class="data">';
@@ -202,7 +206,7 @@ function igr_nouen_vegetables_pickup ( $atts ) {
 	$type_current = '';
 	if ( $the_query->have_posts() ) :
 
-		$html .= '<ul class="pickup">';
+		$html .= '<ul class="tile">';
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 
 			$html .= '<li class="hentry"><a href="' .get_permalink() .'">' ;
@@ -235,25 +239,71 @@ function igarashi_nouen_post_image_html( $html, $post_id, $post_image_id ) {
 }
 add_filter( 'post_thumbnail_html', 'igarashi_nouen_post_image_html', 10, 3 );
 
-//////////////////////////////////////////////////////
-// Display the vegetables meta by Advanced Custom Fields
-function igarashi_nouen_the_vegetavles_meta() {
+/////////////////////////////////////////////////////
+// get type label in vegetables
+function igarashi_nouen_get_type_label( $value, $anchor = TRUE ) {
+	$label ='';
+	$fields = get_field_object( 'type' );
+	$url = get_post_type_archive_link( 'vegetables' );
 
-	echo '<div class="vegetables-meta">';
-
-	// type
-	$type = get_field( 'type' );
-	if( $type ){
-		$fields = get_field_object( 'type' );
-		echo '<span>' .( $fields[ 'choices' ][ $type ] ) .'</span>';
+	if( array_key_exists( 'choices' , $fields ) ){
+		$label .= '<span>';
+		if( $anchor ){
+			$label .= '<a href="' .$url .'/type/' .$value .'">';
+		}
+		$label .= $fields[ 'choices' ][ $value ];
+		if( $anchor ){
+			$label .= '</a>';
+		}
+		$label .= '</span>';
 	}
 
-	// season
-	$season = get_field( 'season' );
-	if( $season ){
-		$fields = get_field_object( 'season' );
-		echo '<span>' .( $fields[ 'choices' ][ $season ] ) .'</span>';
-	}
-
-	echo '</div>';
+	return $label;
 }
+
+/////////////////////////////////////////////////////
+// get season label in vegetables
+function igarashi_nouen_get_season_label( $value, $anchor = TRUE ) {
+	$label ='';
+	$fields = get_field_object( 'season' );
+	$url = get_post_type_archive_link( 'vegetables' );
+
+	if( is_array($value)){
+		foreach ( $value as $key => $v ) {
+			if( array_key_exists( 'choices', $fields) ) {
+				$label .= '<span>';
+				if( $anchor ){
+					$label .= '<a href="' .$url .'/season/' .$v .'">';
+				}
+				$label .= ( $fields[ 'choices' ][ $v ] );
+				if( $anchor ){
+					$label .= '</a>';
+				}
+				$label .= '</span>';
+			}
+		}
+	}
+	else{
+		if( array_key_exists( 'choices', $fields) ) {
+			$label .= '<span>'. $fields[ 'choices' ][ $value ] .'</span>';
+		}
+	}
+
+	return $label;
+}
+
+/////////////////////////////////////////////////////
+// add permalink rule for vegetables
+function myRewriteRule(){
+	add_rewrite_rule('vegetables/type/([a-zA-Z_]+)/?$' ,'index.php?post_type=vegetables&type=$matches[1]', 'top');
+	add_rewrite_rule('vegetables/season/([a-zA-Z_]+)/?$' ,'index.php?post_type=vegetables&season=$matches[1]', 'top');
+}
+add_action( 'init', 'myRewriteRule' );
+/////////////////////////////////////////////////////
+// add permalink parameters for vegetables
+function add_query_vars_filter( $vars ){
+	$vars[] = "type";
+	$vars[] = "season";
+	return $vars;
+}
+add_filter( 'query_vars', 'add_query_vars_filter' );

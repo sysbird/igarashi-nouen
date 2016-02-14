@@ -28,7 +28,7 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 				$args = array(
 					'posts_per_page'	=> $posts_per_page,
 					'offset'			=> $offset,
-					'post_type'			=> 'vegetables',
+					'post_type'		=> 'vegetables',
 					'post_status'		=> 'publish'
 				);
 
@@ -45,7 +45,19 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 							<?php $my_content = apply_filters('the_content',get_the_content());
 							$my_content = preg_replace( "|(<img[^>]+>)|si", "", $my_content );
 							echo $my_content; ?>
-							<?php igarashi_nouen_the_vegetavles_meta(); ?>
+
+							<div class="vegetables-meta">
+								<?php $type = get_field( 'type' );
+								if( $type ) : ?>
+									<?php echo igarashi_nouen_get_type_label( $type ) ?>
+								<?php endif; ?>
+
+								<?php $season = get_field( 'season' );
+								if( $season ): ?>
+									<?php echo igarashi_nouen_get_season_label( $season ); ?>
+								<?php endif; ?>
+							</div>
+
 						</div>
 					<?php endwhile; ?>
 

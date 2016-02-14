@@ -133,6 +133,11 @@ This theme, like WordPress, is licensed under the GPL.
 	background: none;
 }
 
+#content #blog ul.article .hentry .entry-header,
+#content  #blog ul.article .hentry .entry-header .entry-title {
+	color: #235926 !important;
+}
+
 #footer .site-title {
 	border-top: none;
 }
@@ -201,15 +206,15 @@ This theme, like WordPress, is licensed under the GPL.
 	margin-top: 3.2em;
 }
 
-/* vegetables pickup at home */
-.home #content .pickup {
+/* vegetables ul.tile at home */
+#content ul.tile {
 	list-style: none;
 	margin: 0 0 1.6em 0;
 	padding: 0;
 	overflow: hidden;
 	*zoom: 1; }
 
-.home #content .pickup li {
+#content ul.tile li {
 	border: solid 1px #E6E6E6;
 	border-radius: 4px;
 	margin: 0 1% 10px;
@@ -219,26 +224,27 @@ This theme, like WordPress, is licensed under the GPL.
 	float: left;
 }
 
-.home #content .pickup li .entry-eyecatch img {
+#content ul.tile li .entry-eyecatch img {
 	vertical-align: text-bottom;
 	border-radius: 4px 4px 0 0;
 	width: 100%; }
 
-.home #content .pickup li .entry-header {
+#content ul.tile li .entry-header {
 	padding: 10px;
 	margin: 0; }
 
-.home #content .pickup li .entry-header .entry-title {
+#content ul.tile li .entry-header .entry-title {
 	font-size: 1.6rem;
 	color: #235926;
 	margin-bottom: 0;
-	border: none;}
+	border: none;
+	color: #817775; }
 
-.home #content .pickup li a {
+#content ul.tile li a {
 	display: block;
 	height: 100%; }
 
-.home #content .pickup li a:hover {
+#content ul.tile li a:hover {
 	text-decoration: none;
 	background: #F5F5F5; }
 
@@ -304,6 +310,11 @@ This theme, like WordPress, is licensed under the GPL.
 	padding-left: 0;
 }
 
+#content #all-vegetables .entry-title,
+#content #all-vegetables .entry-title a {
+	color: #817775;
+}
+
 #content #all-vegetables .type-vegetables .thumbnail {
 	display: block;
 	max-width: 100%;
@@ -320,7 +331,7 @@ This theme, like WordPress, is licensed under the GPL.
 	*zoom: 1;
 }
 
-#content .vegetables-meta span {
+#content .vegetables-meta span a {
 	display: block;
 	float: left;
 	margin-right: 0.4em;
@@ -331,6 +342,12 @@ This theme, like WordPress, is licensed under the GPL.
 	padding-top: 1.6em;
 	text-align: center;
 	border-radius: 50%;
+	color: #817775;
+}
+
+#content .vegetables-meta span a:hover {
+	background: #f1efe9;
+	text-decoration: none;
 }
 
 #content #all-vegetables #infscr-loading em {
@@ -444,12 +461,12 @@ This theme, like WordPress, is licensed under the GPL.
 		top: 60px;
 	}
 
-	.home #content .pickup li {
+	#content ul.tile li {
 		width: 300px;
 		float: left;
 		margin: 0 5px 10px 5px; }
 
-	.home #content .pickup li .entry-header {
+	#content ul.tile li .entry-header {
 		padding:  20px;
 	}
 }
