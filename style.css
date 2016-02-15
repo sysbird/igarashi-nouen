@@ -55,8 +55,7 @@ This theme, like WordPress, is licensed under the GPL.
 	padding: 20px 0.8em;
 }
 
-.home #wall .widget,
-.blog #wall .widget {
+.home #wall .widget {
 	position: relative;
 	width: 50%;
 	height: 50%;
@@ -65,20 +64,14 @@ This theme, like WordPress, is licensed under the GPL.
 	margin: -60% auto 5%;
 	max-width: 400px;
 	max-height: 400px;
-}
-
-.home #wall .widget,
-.blog #wall .widget {
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
-.home #wall .widget:hover,
-.blog #wall .widget:hover {
+.home #wall .widget:hover {
 	background-color: rgba(255, 255, 255, 0.6);
 }
 
-.home #wall:after,
-.blog #wall:after {
+.home #wall:after {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -292,16 +285,18 @@ This theme, like WordPress, is licensed under the GPL.
 	color: #CCC;
 }
 
-#content table.vegetables-calendar span.best {
+#content table.vegetables-calendar td span.best {
 	color: #FFF;
 	background: #ae3f14;
-	border-right: solid 1px #e6e6e6;
+/*	border-right: solid 1px #e6e6e6; */
 }
 
-#content table.vegetables-calendar span.good {
-	color: #FFF;
+#content table.vegetables-calendar td span.half {
+	width: 4.1%;
+}
+
+#content table.vegetables-calendar td span.half.best {
 	background: #be9586;
-	border-right: solid 1px #e6e6e6;
 }
 
 #content #all-vegetables {
@@ -387,8 +382,7 @@ This theme, like WordPress, is licensed under the GPL.
 		padding-right: 5px;
 	}
 
-	.home #wall .widget,
-	.blog #wall .widget {
+	.home #wall .widget {
 		margin-top: 5%;
 	}
 
@@ -452,8 +446,8 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 @media screen and (min-width: 930px) {
-	.home #wall .widget,
-	.blog #wall .widget {
+
+	.home #wall .widget {
 		margin-top: 100px;
 	}
 

@@ -57,7 +57,7 @@ function igr_AdjustHeader() {
 	if('absolute' == jQuery('.headerimage').css('position')){
 		var scrollTop = parseInt( jQuery( this ).scrollTop() );
 		var top = parseInt( jQuery( '.headerimage' ).css('top') );
-		jQuery( '.headerimage' ).css( 'top', (top -80) + 'px' );
+		jQuery( '.headerimage' ).css( 'top', (top -20) + 'px' );
 	}
 }
 
