@@ -1,5 +1,33 @@
 jQuery(function() {
 
+	jQuery('.type-vegetables a').attr( 'href', '#vegetables_boxer' );
+	jQuery('.type-vegetables a').boxer( {
+//		mobile: boxer_mobile
+	} );
+
+	jQuery('.type-vegetables a').live('click',function(){
+
+
+		// vagetables card
+/*
+		var id  = jQuery(this).parents( '.type-vegetables' ).attr('id');
+		id = id.replace( 'post-', '' );
+		var url = '/wp-json/get_vegetables/' + id + '?_jsonp=?';
+		jQuery.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'jsonp'
+			}).done(function(data, status, xhr) {
+
+				// Show
+
+
+			}).fail(function(xhr, status, error) {
+		});
+*/
+		return false;
+});
+
 	// infinitescroll for all vegetables
 	jQuery( window ).load(function() {
 
