@@ -79,10 +79,6 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 
 <?php endwhile; ?>
 
-<div id="vegetables_boxer" style="display: none">
-	<div class="inline_content">表示コンテンツ</div>
-</div>
-
 	</div>
 </div>
 

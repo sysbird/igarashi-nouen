@@ -1,11 +1,18 @@
 jQuery(function() {
 
-	jQuery('.type-vegetables a').attr( 'href', '#vegetables_boxer' );
+	jQuery('.tile .type-vegetables a').attr( 'href', '#vegetables_boxer' );
 	jQuery('.type-vegetables a').boxer( {
-//		mobile: boxer_mobile
+//		mobile: boxer_mobile,
+		callback: function(data){
+			console.log(data);
+		}
 	} );
 
-	jQuery('.type-vegetables a').live('click',function(){
+jQuery(window).on("open.boxer", function(e) {
+}).on("close.boxer", function() {
+});
+	jQuery('.tile a').live('click',function(){
+console.log("ckick");
 
 
 		// vagetables card

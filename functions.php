@@ -41,10 +41,8 @@ function igarashi_nouen_init() {
 
 	// add post type vegetables
 	$labels = array(
-//		'name'		=> '農園でとれる野菜',
-//		'all_items'	=> '農園でとれる野菜の一覧',
-		'name'		=> '漢字',
-		'all_items'	=> '漢字の一覧',
+		'name'		=> '農園でとれる野菜',
+		'all_items'	=> '農園でとれる野菜の一覧',
 		);
 
 	$args = array(
@@ -213,8 +211,18 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 
 		$html .= '<ul class="tile">';
 		while ( $the_query->have_posts() ) : $the_query->the_post();
+			$post_class = '';
+			$classes = get_post_class() ;
 
-			$html .= '<li class="hentry"><a href="' .get_permalink() .'">' ;
+			foreach ( $classes as $class => $c ) {
+				$post_class .= $c .' ';
+			}
+
+			if(!empty( $post_class )){
+				$post_class = 'class="' . $post_class .'"';
+			}
+
+			$html .= '<li id="post-' .get_the_ID() .'"' .$post_class.'><a href="' .get_permalink() .'">' ;
 
 			if( has_post_thumbnail() ):
 				$html .= '<div class="entry-eyecatch">' .get_the_post_thumbnail(  get_the_ID(), 'large' ) .'</div>';
@@ -225,6 +233,8 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 
 		endwhile;
 		$html .= '</ul>';
+		$html .= '<div id="vegetables_boxer" style="display: none"><div class="inline_content"><div class="entry-title">タイトル</div>説明</div></div>';
+
 	endif;
 	wp_reset_postdata();
 
