@@ -1,18 +1,18 @@
 jQuery(function() {
 
-	jQuery('.tile .type-vegetables a').attr( 'href', '#vegetables_boxer' );
-	jQuery('.type-vegetables a').boxer( {
+//	jQuery('.tile .type-vegetables a').attr( 'href', '#vegetables_boxer' );
+//	jQuery('.type-vegetables a').boxer( {
 //		mobile: boxer_mobile,
-		callback: function(data){
-			console.log(data);
-		}
-	} );
+//		callback: function(data){
+//			console.log(data);
+//		}
+//	} );
 
-jQuery(window).on("open.boxer", function(e) {
-}).on("close.boxer", function() {
-});
+//jQuery(window).on("open.boxer", function(e) {
+//}).on("close.boxer", function() {
+//});
 	jQuery('.tile a').live('click',function(){
-console.log("ckick");
+//console.log("ckick");
 
 
 		// vagetables card
@@ -32,7 +32,7 @@ console.log("ckick");
 			}).fail(function(xhr, status, error) {
 		});
 */
-		return false;
+//		return false;
 });
 
 	// infinitescroll for all vegetables
