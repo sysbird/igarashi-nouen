@@ -106,14 +106,14 @@ add_action( 'pre_get_posts', 'igarashi_nouen_query' );
 function igarashi_nouen_scripts() {
 
 	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
-	wp_enqueue_style( 'igarashi-nouen-boxer', get_stylesheet_directory_uri().'/js/Boxer/jquery.fs.boxer.min.css' );
+	wp_enqueue_style( 'igarashi-nouen-magnific-popup', get_stylesheet_directory_uri().'/js/Magnific-Popup/magnific-popup.css' );
 
 	if ( is_page() || is_home() ) {
 		wp_enqueue_script( 'googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp');
 	}
 
-	wp_enqueue_script( 'igarashi-nouen-infinitescroll', get_stylesheet_directory_uri() .'/js/jquery.infinitescroll.js', array( 'jquery' ), '2.1.0');
-	wp_enqueue_script( 'igarashi-nouen-boxer', get_stylesheet_directory_uri() .'/js/Boxer/jquery.fs.boxer.min.js', array( 'jquery' ), '3.3.0');
+	wp_enqueue_script( 'igarashi-nouen-infinitescroll', get_stylesheet_directory_uri() .'/js/jquery.infinitescroll.js', array( 'jquery' ), '1.1.0');
+	wp_enqueue_script( 'igarashi-nouen-magnific-popup', get_stylesheet_directory_uri() .'/js/Magnific-Popup/jquery.magnific-popup.min.js', array( 'jquery' ), '3.3.0');
 	wp_enqueue_script( 'igarashi-nouen', get_stylesheet_directory_uri() .'/js/script.js', array( 'jquery' , 'birdfield' ), '1.00');
 }
 add_action( 'wp_enqueue_scripts', 'igarashi_nouen_scripts' );
@@ -209,31 +209,30 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 	$type_current = '';
 	if ( $the_query->have_posts() ) :
 
-		$html .= '<ul class="tile">';
+		$html .= '<div class="tile">';
 		while ( $the_query->have_posts() ) : $the_query->the_post();
-			$post_class = '';
+			$post_class = 'item';
 			$classes = get_post_class() ;
 
 			foreach ( $classes as $class => $c ) {
-				$post_class .= $c .' ';
+				$post_class .= ' ' .$c;
 			}
 
 			if(!empty( $post_class )){
 				$post_class = 'class="' . $post_class .'"';
 			}
 
-			$html .= '<li id="post-' .get_the_ID() .'"' .$post_class.'><a href="' .get_permalink() .'">' ;
+			$html .= '<div id="post-' .get_the_ID() .'"' .$post_class.'><a href="' .get_permalink() .'">' ;
 
 			if( has_post_thumbnail() ):
 				$html .= '<div class="entry-eyecatch">' .get_the_post_thumbnail(  get_the_ID(), 'large' ) .'</div>';
 			endif;
 
 			$html .= '<header class="entry-header"><h3 class="entry-title">'  .get_the_title() .'</h3></header>';
-			$html .= '</a></li>';
+			$html .= '</a></div>';
 
 		endwhile;
-		$html .= '</ul>';
-		$html .= '<div id="vegetables_boxer" style="display: none"><div class="inline_content"><div class="entry-title">タイトル</div>説明</div></div>';
+		$html .= '</div>';
 
 	endif;
 	wp_reset_postdata();

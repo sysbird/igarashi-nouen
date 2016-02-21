@@ -1,10 +1,5 @@
 <?php get_header();
-
-global $wp_rewrite;
-$infinite_timeline_next = 1;
-if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
-	$infinite_timeline_next = $_GET[ 'infinite_timeline_next' ];
-}
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <div id="content">
@@ -14,16 +9,15 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<?php if(1 == $infinite_timeline_next ): ?>
+		<?php if(1 == $paged ): ?>
 			<?php get_template_part( 'content', 'singular' ); ?>
 		<?php endif; ?>
-
-		<div id="all-vegetables">
+		<div class="tile masonry">
 
 			<?php 	$post_type = get_post_type_object( 'vegetables' );
 
 				$posts_per_page = get_option( 'posts_per_page' );
-				$offset = $posts_per_page * ( $infinite_timeline_next -1 );
+				$offset = $posts_per_page * ( $paged -1 );
 
 				$args = array(
 					'posts_per_page'	=> $posts_per_page,
@@ -35,44 +29,24 @@ if( isset( $_GET[ 'infinite_timeline_next' ] ) ) {
 				$the_query = new WP_Query($args);
 				if ( $the_query->have_posts() ) :
 			?>
-
-				<div class="box">
-
 					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-							<h2 class="entry-title"><a href="<?php the_permalink(); ?>" ><?php the_title(); ?></a></h2>
-							<?php the_post_thumbnail( 'anchor' ); ?>
-							<?php $my_content = apply_filters('the_content',get_the_content());
-							$my_content = preg_replace( "|(<img[^>]+>)|si", "", $my_content );
-							echo $my_content; ?>
 
-							<div class="vegetables-meta">
-								<?php $type = get_field( 'type' );
-								if( $type ) : ?>
-									<?php echo igarashi_nouen_get_type_label( $type ) ?>
+							<a href="<?php the_permalink(); ?>">
+								<?php if( has_post_thumbnail() ): ?>
+									<div class="entry-eyecatch"><?php the_post_thumbnail(  get_the_ID(), 'large' ); ?></div>
 								<?php endif; ?>
-
-								<?php $season = get_field( 'season' );
-								if( $season ): ?>
-									<?php echo igarashi_nouen_get_season_label( $season ); ?>
-								<?php endif; ?>
-							</div>
-
+								<header class="entry-header"><h3 class="entry-title"> <?php the_title(); ?> </h3></header>
+							</a>
 						</div>
 					<?php endwhile; ?>
 
-				</div>
+					<div class="pagenation more"><?php next_posts_link( 'もっとみる', $the_query->max_num_pages ) ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="" class="loading"></div>
+
 
 			<?php endif;
 				wp_reset_postdata();
 			?>
-
-			<?php
-				$url = add_query_arg( array( 'infinite_timeline_next' => ( $infinite_timeline_next + 1 ) ) );
-				$rewrite_url = ( $wp_rewrite->using_permalinks() ) ? '<div class="rewrite_url"></div>' : '';
-			?>
-
-			<div class="pagenation more"><a href="<?php echo $url; ?>">もっと見る</a><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="" class="loading"><?php echo $rewrite_url; ?></div>
 
 		</div>
 	</article>
