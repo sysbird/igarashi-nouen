@@ -162,7 +162,8 @@
                 $(opts.navSelector).hide();
                 opts.loading.msg
                 .appendTo(opts.loading.selector)
-                .show(opts.loading.speed, $.proxy(function() {
+                //.show(opts.loading.speed, $.proxy(function() {
+                .fadeIn(opts.loading.speed, $.proxy(function() {
                     this.beginAjax(opts);
                 }, self));
             };

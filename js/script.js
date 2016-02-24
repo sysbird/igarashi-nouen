@@ -1,15 +1,8 @@
 jQuery(function() {
 
-	jQuery('.type-vegetables a').attr( 'href', '#vegetables_boxer' );
-	jQuery('.type-vegetables a').boxer( {
-//		mobile: boxer_mobile
-	} );
-
-	jQuery('.type-vegetables a').live('click',function(){
-
-
-		// vagetables card
+	// vagetables card
 /*
+	jQuery('.tile .type-vegetables a').live("click",function(){
 		var id  = jQuery(this).parents( '.type-vegetables' ).attr('id');
 		id = id.replace( 'post-', '' );
 		var url = '/wp-json/get_vegetables/' + id + '?_jsonp=?';
@@ -19,44 +12,44 @@ jQuery(function() {
 			dataType: 'jsonp'
 			}).done(function(data, status, xhr) {
 
-				// Show
-
+				// popup
+				jQuery.magnificPopup.open({
+					items: {
+						src: '<div class="vegetables_card"><div class="entry-title">' + data.title + '</div> ' + data.content +'</div>',
+						type: 'inline'
+					}
+				});
 
 			}).fail(function(xhr, status, error) {
 		});
-*/
+
 		return false;
-});
+	});
+*/
 
-	// infinitescroll for all vegetables
-	jQuery( window ).load(function() {
-
-		jQuery( "ul.tile li" ).tile();
-
-		if( 0 < jQuery( '#all-vegetables' ).length ){
-			path = '';
-			if ( jQuery( '#all-vegetables .rewrite_url' ).length ){
-				// using_permalinks
-				path=new Array();
-				path.push( location.href+'?infinite_timeline_next=' );
-				path.push( "" );
+	// infinitescroll for vegetables masonry
+	if( 0 < jQuery( '.more.pagenation' ).length ){
+		// infinitescroll
+		var loading = jQuery( 'img.loading' ).attr( 'src' );
+		jQuery( '.tile' ).infinitescroll( {
+			navSelector : ".more.pagenation",
+			nextSelector : ".more.pagenation a",
+			itemSelector : ".tile .type-vegetables",
+			bufferPx: 800,
+			loading: {
+				finishedMsg: '',
+				msgText  : '読み込み中...',
+				img: loading,
 			}
-
-			// infinitescroll
-			var loading = jQuery( '#all-vegetables img.loading' ).attr( 'src' );
-			jQuery( '#all-vegetables' ).infinitescroll( {
-				navSelector : "#all-vegetables .pagenation",
-				nextSelector : "#all-vegetables .pagenation a",
-				itemSelector : "#all-vegetables .box",
-				loading: {
-					img: loading,
-				},
-				path : path
-			},
-			function( newElements ){
-			} );
-		}
-	} );
+		},
+		function( newElements ){
+			var newElems = jQuery( newElements ).css({ opacity: 0 });
+			newElems.imagesLoaded(function(){
+				newElems.animate({ opacity: 1 });
+				jQuery( '.tile.masonry' ).masonry( 'appended', newElems, true );
+			});
+		} );
+	}
 
 	// Google Maps
 	if( jQuery( '#map-canvas').length ){
@@ -65,6 +58,15 @@ jQuery(function() {
 
 	// thin header for scroll
 	igr_AdjustHeader();
+
+	jQuery( window ).load(function() {
+		jQuery( ".home .tile .type-vegetables" ).tile();
+
+		jQuery( '.tile.masonry ' ).masonry({
+			itemSelector: '.type-vegetables',
+			isAnimated: true
+		});
+	} );
 
 	jQuery( window ).scroll(function () {
 		if ( jQuery( this ).scrollTop() > 200 ) {
