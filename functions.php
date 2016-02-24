@@ -41,8 +41,10 @@ function igarashi_nouen_init() {
 
 	// add post type vegetables
 	$labels = array(
-		'name'		=> '農園でとれる野菜',
-		'all_items'	=> '農園でとれる野菜の一覧',
+//		'name'		=> '農園でとれる野菜',
+//		'all_items'	=> '農園でとれる野菜の一覧',
+		'name'		=> '漢字',
+		'all_items'	=> '漢字の一覧',
 		);
 
 	$args = array(
@@ -228,7 +230,9 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 				$html .= '<div class="entry-eyecatch">' .get_the_post_thumbnail(  get_the_ID(), 'large' ) .'</div>';
 			endif;
 
-			$html .= '<header class="entry-header"><h3 class="entry-title">'  .get_the_title() .'</h3></header>';
+			$html .= '<header class="entry-header">';
+			$html .= igarashi_nouen_get_catchcopy();
+			$html .= '<h3 class="entry-title">'  .get_the_title() .'</h3></header>';
 			$html .= '</a></div>';
 
 		endwhile;
@@ -363,4 +367,16 @@ function igarashi_nouen_get_vegetables( $params ) {
 		$response = new WP_Error('error_code', 'Sorry, no posts matched your criteria.');
 		return $response;
 	}
+}
+
+/////////////////////////////////////////////////////
+// show catchcopy at vegetables tile
+function igarashi_nouen_get_catchcopy() {
+
+	$catchcopy = get_field( 'catchcopy' );
+	if( $catchcopy ){
+		return '<p>' .$catchcopy .'</p>';
+	}
+
+	return NULL;
 }

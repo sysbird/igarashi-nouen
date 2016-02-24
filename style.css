@@ -233,9 +233,13 @@ This theme, like WordPress, is licensed under the GPL.
 #content .tile  .type-vegetables .entry-header .entry-title {
 	font-size: 1.4rem;
 	color: #235926;
-	margin-bottom: 0;
-	border: none;
-	color: #817775; }
+	margin-bottom: 0; }
+
+#content  .tile .type-vegetables p {
+	display: inline;
+	font-size: 0.9em;
+	color: #817775;
+	margin-bottom: 0; }
 
 #content .tile .type-vegetables a {
 	display: block;
@@ -303,25 +307,8 @@ This theme, like WordPress, is licensed under the GPL.
 	background: #be9586;
 }
 
-#content #all-vegetables {
-	list-style-type: none;
-	margin-left: 0;
-	padding-left: 0;
-}
-
-#content #all-vegetables .entry-title,
-#content #all-vegetables .entry-title a {
-	color: #817775;
-}
-
-#content #all-vegetables .type-vegetables .thumbnail {
-	display: block;
-	max-width: 100%;
-	margin: 0 auto 0.8em;
-}
-
-#content #all-vegetables .type-vegetables strong {
-	background: #FCFFD6;
+#content .type-vegetables strong {
+	background: linear-gradient(transparent 30%, #FCFFD6 0%);
 	font-weight: normal;
 }
 
@@ -441,23 +428,6 @@ This theme, like WordPress, is licensed under the GPL.
 
 	#content table.vegetables-calendar span {
 		padding: 0.2em 0;
-	}
-
-	#content #all-vegetables {
-		list-style-type: none;
-		margin-left: 0;
-		padding-left: 0;
-	}
-
-	#content #all-vegetables .type-vegetables {
-		overflow: hidden;
-		*zoom: 1;
-	}
-
-	#content #all-vegetables .type-vegetables .thumbnail {
-		float: right;
-		margin-left: 3%;
-		max-width: 300px;
 	}
 }
 
