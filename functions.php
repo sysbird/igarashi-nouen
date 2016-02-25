@@ -208,7 +208,37 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 	);
 
 	$the_query = new WP_Query($args);
-	$type_current = '';
+	if ( $the_query->have_posts() ) :
+		$html .= '<div class="tile">';
+		ob_start();
+
+		while ( $the_query->have_posts() ) : $the_query->the_post();
+			get_template_part( 'content', 'vegetables' );
+		endwhile;
+
+		$html .= ob_get_contents();
+		ob_end_clean();
+
+		$html .= '</div>';
+	endif;
+	wp_reset_postdata();
+
+	return $html;
+}
+
+function _igarashi_nouen_vegetables_pickup ( $atts ) {
+
+	$html = '';
+
+	$args = array(
+		'posts_per_page' => 6,
+		'post_type' => 'vegetables',
+		'post_status' => 'publish',
+		'meta_key' => '_thumbnail_id',
+		'orderby'	 => 'rand',
+	);
+
+	$the_query = new WP_Query($args);
 	if ( $the_query->have_posts() ) :
 
 		$html .= '<div class="tile">';
@@ -239,6 +269,7 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 		$html .= '</div>';
 
 	endif;
+
 	wp_reset_postdata();
 
 	return $html;
@@ -267,7 +298,7 @@ function igarashi_nouen_get_type_label( $value, $anchor = TRUE ) {
 	if( array_key_exists( 'choices' , $fields ) ){
 		$label .= '<span>';
 		if( $anchor ){
-			$label .= '<a href="' .$url .'/type/' .$value .'">';
+			$label .= '<a href="' .$url .'type/' .$value .'">';
 		}
 		$label .= $fields[ 'choices' ][ $value ];
 		if( $anchor ){
@@ -291,7 +322,7 @@ function igarashi_nouen_get_season_label( $value, $anchor = TRUE ) {
 			if( array_key_exists( 'choices', $fields) ) {
 				$label .= '<span>';
 				if( $anchor ){
-					$label .= '<a href="' .$url .'/season/' .$v .'">';
+					$label .= '<a href="' .$url .'season/' .$v .'">';
 				}
 				$label .= ( $fields[ 'choices' ][ $v ] );
 				if( $anchor ){
