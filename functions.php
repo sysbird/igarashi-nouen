@@ -180,9 +180,10 @@ function igarashi_nouen_vegetables_calendar ( $atts ) {
 		$html .= '</tr>';
 
 		endwhile;
+
+		wp_reset_postdata();
 	endif;
 
-	wp_reset_postdata();
 
 	if( !empty( $html )){
 		$html .= $html_table_footer;
@@ -197,7 +198,7 @@ add_shortcode( 'igarashi_nouen_vegetables_calendar', 'igarashi_nouen_vegetables_
 // Shortcode Vegitables Pickup at home
 function igarashi_nouen_vegetables_pickup ( $atts ) {
 
-	$html = '';
+	ob_start();
 
 	$args = array(
 		'posts_per_page' => 6,
@@ -209,70 +210,18 @@ function igarashi_nouen_vegetables_pickup ( $atts ) {
 
 	$the_query = new WP_Query($args);
 	if ( $the_query->have_posts() ) :
-		$html .= '<div class="tile">';
-		ob_start();
+		?> <div class="tile"><?php
 
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 			get_template_part( 'content', 'vegetables' );
 		endwhile;
 
-		$html .= ob_get_contents();
-		ob_end_clean();
+		?></div><?php
 
-		$html .= '</div>';
-	endif;
-	wp_reset_postdata();
-
-	return $html;
-}
-
-function _igarashi_nouen_vegetables_pickup ( $atts ) {
-
-	$html = '';
-
-	$args = array(
-		'posts_per_page' => 6,
-		'post_type' => 'vegetables',
-		'post_status' => 'publish',
-		'meta_key' => '_thumbnail_id',
-		'orderby'	 => 'rand',
-	);
-
-	$the_query = new WP_Query($args);
-	if ( $the_query->have_posts() ) :
-
-		$html .= '<div class="tile">';
-		while ( $the_query->have_posts() ) : $the_query->the_post();
-			$post_class = 'item';
-			$classes = get_post_class() ;
-
-			foreach ( $classes as $class => $c ) {
-				$post_class .= ' ' .$c;
-			}
-
-			if(!empty( $post_class )){
-				$post_class = 'class="' . $post_class .'"';
-			}
-
-			$html .= '<div id="post-' .get_the_ID() .'"' .$post_class.'><a href="' .get_permalink() .'">' ;
-
-			if( has_post_thumbnail() ):
-				$html .= '<div class="entry-eyecatch">' .get_the_post_thumbnail(  get_the_ID(), 'large' ) .'</div>';
-			endif;
-
-			$html .= '<header class="entry-header">';
-			$html .= igarashi_nouen_get_catchcopy();
-			$html .= '<h3 class="entry-title">'  .get_the_title() .'</h3></header>';
-			$html .= '</a></div>';
-
-		endwhile;
-		$html .= '</div>';
-
+		wp_reset_postdata();
 	endif;
 
-	wp_reset_postdata();
-
-	return $html;
+	return ob_get_clean();
 }
 add_shortcode( 'igarashi_nouen_vegetables_pickup', 'igarashi_nouen_vegetables_pickup' );
 
@@ -383,9 +332,9 @@ function igarashi_nouen_get_vegetables( $params ) {
 			$content = apply_filters('the_content', get_the_content() );
 			break;
 		endwhile;
-	endif;
 
-	wp_reset_postdata();
+		wp_reset_postdata();
+	endif;
 
 	if($find) {
 		return new WP_REST_Response( array(

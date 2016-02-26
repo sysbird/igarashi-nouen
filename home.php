@@ -72,8 +72,8 @@
 	</section>
 
 	<?php endwhile;
-		endif;
 		wp_reset_postdata();
+		endif;
 	?>
 
 </div>
