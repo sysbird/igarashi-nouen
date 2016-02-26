@@ -41,10 +41,8 @@ function igarashi_nouen_init() {
 
 	// add post type vegetables
 	$labels = array(
-//		'name'		=> '農園でとれる野菜',
-//		'all_items'	=> '農園でとれる野菜の一覧',
-		'name'		=> '漢字',
-		'all_items'	=> '漢字の一覧',
+		'name'		=> '農園でとれる野菜',
+		'all_items'	=> '農園でとれる野菜の一覧',
 		);
 
 	$args = array(
