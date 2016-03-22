@@ -56,9 +56,6 @@ jQuery(function() {
 		google.maps.event.addDomListener(window, 'load',  igr_google_maps);
 	}
 
-	// thin header for scroll
-	igr_AdjustHeader();
-
 	jQuery( window ).load(function() {
 		jQuery( ".home .tile .type-vegetables" ).tile();
 
@@ -68,28 +65,7 @@ jQuery(function() {
 		});
 	} );
 
-	jQuery( window ).scroll(function () {
-		if ( jQuery( this ).scrollTop() > 200 ) {
-			jQuery('#header').addClass('thin');
-		}
-		else {
-			jQuery('#header').removeClass('thin');
-		}
-
-		igr_AdjustHeader();
-	});
 });
-
-////////////////////////////////////////
-// Adjust parallax
-function igr_AdjustHeader() {
-
-	if('absolute' == jQuery('.headerimage').css('position')){
-		var scrollTop = parseInt( jQuery( this ).scrollTop() );
-		var top = parseInt( jQuery( '.headerimage' ).css('top') );
-		jQuery( '.headerimage' ).css( 'top', (top -20) + 'px' );
-	}
-}
 
 ////////////////////////////////////////
 // Google Maps for access

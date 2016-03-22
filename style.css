@@ -38,22 +38,22 @@ This theme, like WordPress, is licensed under the GPL.
 	z-index: 2;
 }
 
+#header #branding #site-title a {
+	display: block;
+	width: 200px;
+	height: 80px;
+	position: relative;
+	z-index: 2;
+}
+
+#header.mini #branding #site-title,
+#header.mini #branding #site-title a {
+	width: 225px;
+	height: 60px;
+}
+
 #header #branding #site-description {
-  display: none;
-}
-
-#header.thin {
-	min-height: 60px;
-}
-
-#header.thin  #branding #site-title,
-#header.thin #branding #site-title a {
-	height: 60px;
-}
-
-#header.thin #menu-wrapper .menu ul#menu-primary-items > li > a {
-	height: 60px;
-	padding: 20px 0.8em;
+	display: none;
 }
 
 .home #wall .widget {
@@ -227,7 +227,7 @@ This theme, like WordPress, is licensed under the GPL.
 	width: 100%; }
 
 #content .tile .type-vegetables .entry-header {
-	padding: 10px;
+	padding: 5px;
 	margin: 0; }
 
 #content .tile  .type-vegetables .entry-header .entry-title {
@@ -435,10 +435,6 @@ This theme, like WordPress, is licensed under the GPL.
 
 	.home #wall .widget {
 		margin-top: 100px;
-	}
-
-	#header.thin #menu-wrapper .menu ul#menu-primary-items li ul {
-		top: 60px;
 	}
 
 	#content .tile .type-vegetables {
