@@ -11,6 +11,7 @@
 		</section>
 	<?php endif; ?>
 
+
 	<?php if ( have_posts() ) : ?>
 		<section id="blog">
 			<div class="container">
@@ -22,7 +23,7 @@
 				<?php endwhile; ?>
 				</ul>
 
-				<div class="more"><a href="<?php echo esc_url( home_url( '/' ) ); ?>/news/"><?php echo esc_html( get_post_type_object( 'news')->label ); ?>をもっと見る</a></div>
+				<div class="more"><a href="<?php echo esc_url( home_url( '/' ) ); ?>news/"><?php echo esc_html( get_post_type_object( 'news')->label ); ?>をもっと見る</a></div>
 			</div>
 		</section>
 	<?php endif; ?>

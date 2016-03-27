@@ -1,4 +1,3 @@
-
 @charset "utf-8";
 /*
 Theme Name: igarashi-nouen
@@ -22,7 +21,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #header #branding #site-title {
-	background: url("images/logo-horizontal.png") no-repeat left top;
+	background: url("images/logo.svg") no-repeat left top;
 	background-size: contain;
 	width: 300px;
 	height: 80px;
@@ -32,15 +31,7 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header #branding #site-title a {
 	display: block;
-	width: 200px;
-	height: 80px;
-	position: relative;
-	z-index: 2;
-}
-
-#header #branding #site-title a {
-	display: block;
-	width: 200px;
+	width: 280px;
 	height: 80px;
 	position: relative;
 	z-index: 2;
@@ -56,20 +47,24 @@ This theme, like WordPress, is licensed under the GPL.
 	display: none;
 }
 
+#header:not(.mini)  #menu-wrapper .menu #small-menu:before {
+	padding-top: 5px;
+}
+
 .home #wall .widget {
 	position: relative;
-	width: 50%;
-	height: 50%;
+	width: 40%;
+	height: 40%;
 	border-radius: 50%;
 	padding: 0;
 	margin: -60% auto 5%;
-	max-width: 400px;
-	max-height: 400px;
-	background-color: rgba(255, 255, 255, 0.5);
+	max-width: 300px;
+	max-height: 300px;
+/*	background-color: rgba(255, 255, 255, 0.5); */
 }
 
 .home #wall .widget:hover {
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 .home #wall:after {
@@ -88,7 +83,7 @@ This theme, like WordPress, is licensed under the GPL.
 	text-align: left;
 }
 
-.home #content .information .container {
+.home #content .container {
 	padding: 1.6em 0;
 }
 
@@ -97,11 +92,11 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #content .more {
-	text-align: center;
-	padding: 0.4em 0;
 	margin-bottom: 1.6em;
-}
+	text-align: center; }
 
+.home #content .more {
+	margin-bottom: 0; }
 #content .more a {
 	display: block;
 	background-color: #817775;
@@ -129,7 +124,15 @@ This theme, like WordPress, is licensed under the GPL.
 
 #content #blog ul.article .hentry .entry-header,
 #content  #blog ul.article .hentry .entry-header .entry-title {
-	color: #235926 !important;
+	color: #817775 !important;
+}
+
+.home #content #blog ul.article, .blog #content #blog ul.article {
+	margin-top: -10px;
+}
+
+.home #content #blog ul.article .hentry, .blog #content #blog ul.article .hentry {
+	margin: 10px 5px 0;
 }
 
 #footer .site-title {
@@ -156,6 +159,11 @@ This theme, like WordPress, is licensed under the GPL.
 
 #footer #widget-area .widget h3 {
 	border-bottom: dotted 1px #817775;
+}
+
+#footer #widget-area .right  {
+	width: 100%;
+	height: 420px;
 }
 
 .entry-header .author,
@@ -193,28 +201,24 @@ This theme, like WordPress, is licensed under the GPL.
 #map-canvas {
 	height: 320px;
 	width: 100%;
-	margin: 1.6em 0;
-}
-
-.home #map-canvas {
-	margin-top: 3.2em;
+	margin: 1.6em 0 0;
 }
 
 #content .tile {
 	list-style: none;
-	margin: 0 0 1.6em 0;
+	margin: -10px 0 1.6em 0;
 	padding: 0;
 	overflow: hidden;
 	*zoom: 1; }
 
 #content .tile.masonry {
-	padding-bottom: 3.2em;
+	padding: 0 0 3.2em;
 }
 
 #content  .tile .type-vegetables {
 	border: solid 1px #E6E6E6;
 	border-radius: 4px;
-	margin: 0 1% 10px;
+	margin: 10px 1% 0;
 	padding: 0;
 	background: #FFF;
 	width: 48%;
@@ -235,11 +239,15 @@ This theme, like WordPress, is licensed under the GPL.
 	color: #235926;
 	margin-bottom: 0; }
 
-#content  .tile .type-vegetables p {
+#content .type-vegetables p.catchcopy {
 	display: inline;
 	font-size: 0.9em;
 	color: #817775;
 	margin-bottom: 0; }
+
+.single #content .type-vegetables p.catchcopy {
+	font-size: 1em;
+	margin-bottom: 0.8em; }
 
 #content .tile .type-vegetables a {
 	display: block;
@@ -252,7 +260,7 @@ This theme, like WordPress, is licensed under the GPL.
 /* vegetables page */
 #content table.vegetables-calendar {
 	font-size: 0.9em;
-	margin-bottom: 3.2em;
+	margin-bottom: 1.6em;
 }
 
 #content table.vegetables-calendar th,
@@ -317,6 +325,10 @@ This theme, like WordPress, is licensed under the GPL.
 	*zoom: 1;
 }
 
+.single #content .vegetables-meta {
+	margin-bottom: 1.6em;
+}
+
 #content .vegetables-meta span a {
 	display: block;
 	float: left;
@@ -366,15 +378,26 @@ This theme, like WordPress, is licensed under the GPL.
 	max-width: 100%;
 }
 
+#content .hentry .entry-header .entry-title,
+.home #content h2 {
+	font-size: 2rem; }
+
+#content h2 {
+	font-size: 1.8rem; }
+
 #content h2 a,
 #content h3 a {
 	color: #235926;
 }
 
+img.alignleft, img.alignright, img.aligncenter {
+	margin-bottom:  1.6em;
+}
+
+
 @media screen and (min-width: 660px) {
 
-	#menu-wrapper .menu ul#menu-primary-items li.home a:before {
-		content: "\f015";
+	#menu-wrapper .menu ul#menu-primary-items li >a:before {
 		display: inline-block;
 		font-family: FontAwesome;
 		font-style: normal;
@@ -383,6 +406,18 @@ This theme, like WordPress, is licensed under the GPL.
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		padding-right: 5px;
+	}
+
+	#menu-wrapper .menu ul#menu-primary-items li.home >a:before {
+		content: "\f015";
+	}
+
+	#menu-wrapper .menu ul#menu-primary-items li.about >a:before {
+		content: "\f06c";
+	}
+
+	#menu-wrapper .menu ul#menu-primary-items li.facebook >a:before {
+		content: "\f082";
 	}
 
 	.home #wall .widget {
@@ -399,7 +434,7 @@ This theme, like WordPress, is licensed under the GPL.
 	}
 
 	#content .more  a {
-		display: inline;
+		display: inline-block;
 		font-size: 1em;
 	}
 
@@ -433,6 +468,14 @@ This theme, like WordPress, is licensed under the GPL.
 
 @media screen and (min-width: 930px) {
 
+	#content .hentry .entry-header .entry-title,
+	.home #content h2 {
+	 	font-size: 2.2rem; }
+
+	#content h2 {
+		font-size: 2rem; }
+
+
 	.home #wall .widget {
 		margin-top: 100px;
 	}
@@ -440,9 +483,28 @@ This theme, like WordPress, is licensed under the GPL.
 	#content .tile .type-vegetables {
 		width: 300px;
 		float: left;
-		margin: 0 5px 10px 5px; }
+		margin: 10px 5px 0 5px; }
 
 	#content  .tile .type-vegetables .entry-header {
 		padding:  20px;
+	}
+
+	#footer #widget-area {
+		height: 440px;
+	}
+
+	#footer #widget-area .left {
+		width: 400px;
+		float: left;
+	}
+
+	#footer #widget-area .left .widget {
+		width: 400px;
+	}
+
+	#footer #widget-area .right  {
+		width: 500px;
+		margin-top: 20px;
+		float: right;
 	}
 }

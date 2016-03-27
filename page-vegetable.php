@@ -11,6 +11,14 @@
 
 		<?php if(1 == $paged ): ?>
 			<?php get_template_part( 'content', 'singular' ); ?>
+			<?php if ( wp_is_mobile() ): ?>
+				<?php
+					$page = get_page_by_path( 'calendar' );
+				?>
+				<p><a href="<?php echo get_the_permalink( $page->ID); ?>">&raquo; <?php echo $page->post_title; ?></a></p>
+			<?php else: ?>
+				<?php echo do_shortcode( '[igarashi_nouen_vegetables_calendar]' ); ?>
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php $posts_per_page = get_option( 'posts_per_page' );

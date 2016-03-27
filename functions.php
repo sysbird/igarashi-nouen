@@ -19,24 +19,21 @@ add_action( 'after_setup_theme', 'igarashi_nouen_setup' );
 // Child Theme Initialize
 function igarashi_nouen_init() {
 
-	// add tags at page
+ 	// add tags at page
 	register_taxonomy_for_object_type('post_tag', 'page');
-
 	// add post type news
 	$labels = array(
 		'name'		=> 'お知らせ',
 		'all_items'	=> 'お知らせの一覧',
 		);
-
 	$args = array(
-		'labels'		=> $labels,
+		'labels'			=> $labels,
 		'supports'		=> array( 'title','editor', 'thumbnail' ),
-		'public'		=> true,	// 公開するかどうが
+		'public'			=> true,	// 公開するかどうが
 		'show_ui'		=> true,	// メニューに表示するかどうか
 		'menu_position'	=> 5,		// メニューの表示位置
-		'has_archive'	=> true,	// アーカイブページの作成
+		'has_archive'		=> true,	// アーカイブページの作成
 		);
-
 	register_post_type( 'news', $args );
 
 	// add post type vegetables
@@ -65,6 +62,7 @@ add_action( 'init', 'igarashi_nouen_init', 0 );
 //////////////////////////////////////////////////////
 // Filter at main query
 function igarashi_nouen_query( $query ) {
+
  	if ( $query->is_home() && $query->is_main_query() ) {
  		// toppage news
 		$query->set( 'post_type', 'news' );
@@ -132,6 +130,10 @@ add_shortcode( 'igarashi_nouen_map', 'igarashi_nouen_nouen_map' );
 // Shortcode Vegitables Calendar
 function igarashi_nouen_vegetables_calendar ( $atts ) {
 
+	extract( shortcode_atts( array(
+		'title' => 'no'
+		), $atts ) );
+
 	$html_table_header = '<table class="vegetables-calendar"><tbody><tr><th class="title">&nbsp;</th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
 	$html_table_footer = '</tbody></table>';
 	$html = '';
@@ -186,7 +188,10 @@ function igarashi_nouen_vegetables_calendar ( $atts ) {
 	if( !empty( $html )){
 		$html .= $html_table_footer;
 	}
-	$html = '<h2>野菜収穫カレンダー</h2>' .$html;
+
+	if( 'yes' === $title ){
+		$html = '<h2>野菜収穫カレンダー</h2>' .$html;
+	}
 
 	return $html;
 }
@@ -290,12 +295,12 @@ function igarashi_nouen_get_season_label( $value, $anchor = TRUE ) {
 
 /////////////////////////////////////////////////////
 // add permalink parameters for vegetables
-function add_query_vars_filter( $vars ){
+function igarashi_nouen_query_vars( $vars ){
 	$vars[] = "type";
 	$vars[] = "season";
 	return $vars;
 }
-add_filter( 'query_vars', 'add_query_vars_filter' );
+add_filter( 'query_vars', 'igarashi_nouen_query_vars' );
 
 /////////////////////////////////////////////////////
 // Add WP REST API Endpoints
@@ -353,8 +358,17 @@ function igarashi_nouen_get_catchcopy() {
 
 	$catchcopy = get_field( 'catchcopy' );
 	if( $catchcopy ){
-		return '<p>' .$catchcopy .'</p>';
+		return '<p class="catchcopy">' .$catchcopy .'</p>';
 	}
 
 	return NULL;
 }
+
+//////////////////////////////////////////////////////
+// login logo
+function igarashi_nouen_login_head() {
+
+	$url = get_stylesheet_directory_uri() .'/images/login.png';
+	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 84px; width: 320px; background-size: 100% 100%;}</style>';
+}
+add_action('login_head', 'igarashi_nouen_login_head');
