@@ -121,7 +121,7 @@ add_action( 'wp_enqueue_scripts', 'igarashi_nouen_scripts' );
 function igarashi_nouen_nouen_map ( $atts ) {
 
 	$output = '<div id="map-canvas">地図はいります </div>';
-	$output .= '<input type="hidden" id="map_icon" value="' .get_stylesheet_directory_uri() .'/images/icon_map.png">';
+	$output .= '<input type="hidden" id="map_icon_path" value="' .get_stylesheet_directory_uri() .'/images">';
 	return $output;
 }
 add_shortcode( 'igarashi_nouen_map', 'igarashi_nouen_nouen_map' );
@@ -372,3 +372,15 @@ function igarashi_nouen_login_head() {
 	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 84px; width: 320px; background-size: 100% 100%;}</style>';
 }
 add_action('login_head', 'igarashi_nouen_login_head');
+
+//////////////////////////////////////////////////////
+// remove emoji
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles', 10 );
+
+//////////////////////////////////////////////////////
+// set favicon
+function igarashi_nouen_favicon() {
+	echo '<link rel="shortcut icon" type="image/x-icon" href="' .get_stylesheet_directory_uri(). '/images/favicon.ico" />'. "\n";
+}
+add_action( 'wp_head', 'igarashi_nouen_favicon' );
