@@ -1,32 +1,5 @@
 jQuery(function() {
 
-	// vagetables card
-/*
-	jQuery('.tile .type-vegetables a').live("click",function(){
-		var id  = jQuery(this).parents( '.type-vegetables' ).attr('id');
-		id = id.replace( 'post-', '' );
-		var url = '/wp-json/get_vegetables/' + id + '?_jsonp=?';
-		jQuery.ajax({
-			type: 'GET',
-			url: url,
-			dataType: 'jsonp'
-			}).done(function(data, status, xhr) {
-
-				// popup
-				jQuery.magnificPopup.open({
-					items: {
-						src: '<div class="vegetables_card"><div class="entry-title">' + data.title + '</div> ' + data.content +'</div>',
-						type: 'inline'
-					}
-				});
-
-			}).fail(function(xhr, status, error) {
-		});
-
-		return false;
-	});
-*/
-
 	// infinitescroll for vegetables masonry
 	if( 0 < jQuery( '.more.pagenation' ).length ){
 		// infinitescroll
@@ -64,14 +37,7 @@ jQuery(function() {
 			isAnimated: true
 		});
 
-		// for facebook
 		jQuery( '#widget-area .container' ).masonry( 'destroy' );
-		var widgetArea = jQuery( '#widget-area' ).height();
-		var footerHeight = jQuery( '#footer .site-title' ).innerHeight();
-		var height = parseInt( widgetArea ) + parseInt( footerHeight );
-		jQuery('#content').css('padding-bottom', height + 'px' );
-		jQuery('#footer').css('height', height + 'px' );
-
 	} );
 });
 
@@ -79,8 +45,7 @@ jQuery(function() {
 // Google Maps for access
 function igr_google_maps() {
 
-	var latlng = new google.maps.LatLng( 35.764384, 139.615194 );
-
+	var latlng = new google.maps.LatLng( 35.764279, 139.615314 );
 	var mapOptions = {
 		zoom: 16,
 		center: latlng,
@@ -196,15 +161,39 @@ function igr_google_maps() {
 	map.mapTypes.set('m_map', m_mapType);
 	map.setMapTypeId('m_map');
 
-	var map_icon = jQuery( '#map_icon' ).val();
+	var map_icon = jQuery( '#map_icon_path' ).val() + '/icon_shop.png' ;
 	var igrMarker = new google.maps.Marker({
 		position: latlng,
 		map: map,
 		icon: map_icon
 	});
 
+	var map_icon = jQuery( '#map_icon_path' ).val() + '/icon_farm1.png' ;
+	var marker_farm1 = new google.maps.Marker({
+		position: new google.maps.LatLng( 35.763808, 139.616001 	),
+		map: map,
+		icon: map_icon,
+		title: '畑 1'
+	});
+
+	var map_icon = jQuery( '#map_icon_path' ).val() + '/icon_farm2.png' ;
+	var marker_farm2 = new google.maps.Marker({
+		position: new google.maps.LatLng( 35.764139, 139.617261 ),
+		map: map,
+		icon: map_icon,
+		title: '畑 2'
+	});
+
+	var map_icon = jQuery( '#map_icon_path' ).val() + '/icon_farm3.png' ;
+	var marker_farm3 = new google.maps.Marker({
+		position: new google.maps.LatLng( 35.763874, 139.617959 	),
+		map: map,
+		icon: map_icon,
+		title: '畑 3'
+	});
+
     new google.maps.InfoWindow({
-        content: '五十嵐農園<a href="https://goo.gl/maps/oJ8dhHpiiB22" style="display :block;padding-top: 5px; font-size: 0.9em;">地図を拡大表示</a>'
+        content: '五十嵐農園(直売所)<br><a href="https://goo.gl/maps/oJ8dhHpiiB22" style="display :block;padding-top: 5px; font-size: 0.9em;" target="_blank">地図を拡大表示</a>'
     }).open(igrMarker.getMap(), igrMarker);
 
 }

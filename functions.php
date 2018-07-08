@@ -104,14 +104,12 @@ add_action( 'pre_get_posts', 'igarashi_nouen_query' );
 function igarashi_nouen_scripts() {
 
 	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
-	wp_enqueue_style( 'igarashi-nouen-magnific-popup', get_stylesheet_directory_uri().'/js/Magnific-Popup/magnific-popup.css' );
 
 	if ( is_page() || is_home() ) {
 		wp_enqueue_script( 'googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp');
 	}
 
 	wp_enqueue_script( 'igarashi-nouen-infinitescroll', get_stylesheet_directory_uri() .'/js/jquery.infinitescroll.js', array( 'jquery' ), '1.1.0');
-	wp_enqueue_script( 'igarashi-nouen-magnific-popup', get_stylesheet_directory_uri() .'/js/Magnific-Popup/jquery.magnific-popup.min.js', array( 'jquery' ), '3.3.0');
 	wp_enqueue_script( 'igarashi-nouen', get_stylesheet_directory_uri() .'/js/script.js', array( 'jquery' , 'birdfield' ), '1.00');
 }
 add_action( 'wp_enqueue_scripts', 'igarashi_nouen_scripts' );

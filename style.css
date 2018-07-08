@@ -117,9 +117,15 @@ This theme, like WordPress, is licensed under the GPL.
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.blog #content #blog,
+.blog #content .information {
+	background: #FFF;
+	position: relative;
+	z-index: 1;
+}
+
 .blog #content #blog {
 	padding-top:  0;
-	background: none;
 }
 
 #content #blog ul.article .hentry .entry-header,
